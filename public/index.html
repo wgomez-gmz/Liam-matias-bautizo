@@ -1,0 +1,2694 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bautizo Liam Matias</title>
+  <meta name="description" content="Invitacion web para el bautizo de Liam Matias">
+  <meta name="theme-color" content="#5A8DB3">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bautizo Liam Matias">
+  <meta property="og:title" content="Bautizo de Liam Matias">
+  <meta property="og:description" content="Con amor te invitamos a celebrar el bautizo de Liam Matias. Abre la invitaci&oacute;n y acomp&aacute;&ntilde;anos en este d&iacute;a tan especial.">
+  <meta property="og:image" content="https://liam-matias.web.app/assets/share/wa-preview-envelope.png">
+  <meta property="og:image:secure_url" content="https://liam-matias.web.app/assets/share/wa-preview-envelope.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vista previa elegante de la invitaci&oacute;n del bautizo de Liam Matias">
+  <meta property="og:locale" content="es_MX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bautizo de Liam Matias">
+  <meta name="twitter:description" content="Con amor te invitamos a celebrar el bautizo de Liam Matias. Abre la invitaci&oacute;n y acomp&aacute;&ntilde;anos en este d&iacute;a tan especial.">
+  <meta name="twitter:image" content="https://liam-matias.web.app/assets/share/wa-preview-envelope.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #5A8DB3;
+      --primary-deep: #467394;
+      --primary-soft: #dfeef8;
+      --paper: #fffdf9;
+      --paper-soft: rgba(255, 253, 249, 0.86);
+      --ink: #35556d;
+      --muted: #66859c;
+      --gold: #c7a35f;
+      --shadow: 0 24px 60px rgba(63, 105, 133, 0.16);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.9), transparent 34%),
+        linear-gradient(180deg, #e9f6ff 0%, #d7ebf8 28%, #f7f1e8 100%);
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .page {
+      position: relative;
+      overflow-x: clip;
+    }
+
+    .page.is-hidden {
+      visibility: hidden;
+    }
+
+    .invitation-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.72), transparent 34%),
+        linear-gradient(180deg, rgba(222,239,250,0.96) 0%, rgba(212,232,245,0.96) 38%, rgba(246,239,228,0.98) 100%);
+      transition: opacity 720ms ease, visibility 720ms ease;
+    }
+
+    .invitation-gate.is-closing {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .invitation-gate::before,
+    .invitation-gate::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .invitation-gate::before {
+      width: min(68vw, 520px);
+      height: min(68vw, 520px);
+      top: -14%;
+      left: -8%;
+      background: radial-gradient(circle, rgba(255,255,255,0.82), rgba(255,255,255,0));
+    }
+
+    .invitation-gate::after {
+      width: min(60vw, 440px);
+      height: min(60vw, 440px);
+      right: -8%;
+      bottom: -18%;
+      background: radial-gradient(circle, rgba(255,255,255,0.56), rgba(255,255,255,0));
+    }
+
+    .gate-envelope {
+      position: relative;
+      width: min(100%, 720px);
+      border-radius: 36px;
+      padding: 18px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.68), rgba(255,255,255,0.18));
+      border: 1px solid rgba(255,255,255,0.48);
+      box-shadow:
+        0 28px 80px rgba(58,98,125,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .gate-envelope::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,250,252,0.94));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .gate-envelope::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+      width: calc(100% - 36px);
+      height: 46%;
+      background: linear-gradient(180deg, rgba(221,236,246,0.9), rgba(206,227,240,0.84));
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-radius: 28px 28px 18px 18px;
+      opacity: 0.95;
+      filter: drop-shadow(0 14px 24px rgba(74,116,145,0.08));
+    }
+
+    .gate-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 28px;
+      padding: clamp(34px, 6vw, 56px) clamp(24px, 5vw, 46px) 32px;
+      text-align: center;
+    }
+
+    .gate-seal {
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-family: "Great Vibes", cursive;
+      font-size: 2.5rem;
+      background: radial-gradient(circle at 30% 30%, #f5dca0, #c7a35f 62%, #ab8344 100%);
+      box-shadow:
+        inset 0 2px 5px rgba(255,255,255,0.35),
+        0 16px 28px rgba(151,117,58,0.26);
+    }
+
+    .gate-kicker {
+      margin: 0 0 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .gate-script {
+      margin: 0;
+      color: var(--primary);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.3rem, 6vw, 4.2rem);
+      line-height: 1;
+    }
+
+    .gate-title {
+      margin: 14px 0 12px;
+      color: var(--primary-deep);
+      font-size: clamp(3rem, 8vw, 5.2rem);
+      line-height: 0.96;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    .gate-copy {
+      margin: 0 auto;
+      max-width: 28rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.85;
+      font-weight: 500;
+    }
+
+    .gate-actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .gate-btn {
+      min-width: 220px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #d6ebf8;
+    }
+
+    .hero-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 100%;
+      height: 100%;
+      transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .hero-slide {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.06);
+      opacity: 0.88;
+      transition:
+        transform 1400ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 1200ms ease;
+    }
+
+    .hero-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(42, 86, 114, 0.12), rgba(42, 86, 114, 0.5)),
+        radial-gradient(circle at top, rgba(255,255,255,0.35), transparent 30%);
+      opacity: 0.92;
+      transition: opacity 1100ms ease;
+    }
+
+    .hero-slide.is-active {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .hero-slide.is-active::before {
+      opacity: 1;
+    }
+
+    .hero-slide[data-tone="soft"]::before {
+      background:
+        linear-gradient(180deg, rgba(42, 86, 114, 0.08), rgba(42, 86, 114, 0.38)),
+        radial-gradient(circle at top, rgba(255,255,255,0.42), transparent 32%);
+    }
+
+    .hero-slide[data-tone="medium"]::before {
+      background:
+        linear-gradient(180deg, rgba(42, 86, 114, 0.14), rgba(42, 86, 114, 0.48)),
+        radial-gradient(circle at top, rgba(255,255,255,0.35), transparent 30%);
+    }
+
+    .hero-slide[data-tone="deep"]::before {
+      background:
+        linear-gradient(180deg, rgba(32, 70, 94, 0.22), rgba(32, 70, 94, 0.58)),
+        radial-gradient(circle at top, rgba(255,255,255,0.28), transparent 28%);
+    }
+
+    .hero-overlay {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1100px);
+      display: grid;
+      gap: 22px;
+      text-align: center;
+      justify-items: center;
+      transform: translateY(22px);
+      opacity: 0.2;
+      transition:
+        transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 900ms ease;
+    }
+
+    .hero-slide.is-active .hero-overlay {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .hero-overlay > * {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        transform 760ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 760ms ease;
+    }
+
+    .hero-slide.is-active .hero-overlay > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-slide.is-active .hero-pill { transition-delay: 120ms; }
+    .hero-slide.is-active .hero-script { transition-delay: 220ms; }
+    .hero-slide.is-active .hero-title { transition-delay: 340ms; }
+    .hero-slide.is-active .hero-text { transition-delay: 480ms; }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-pill::before,
+    .hero-pill::after {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(255,255,255,0.8);
+    }
+
+    .hero-title {
+      margin: 0;
+      color: white;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.5rem, 10vw, 7.2rem);
+      line-height: 0.92;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.16);
+    }
+
+    .hero-script {
+      margin: 0;
+      color: #f5fbff;
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.2rem, 6vw, 4.4rem);
+    }
+
+    .hero-text {
+      margin: 0;
+      max-width: 42rem;
+      color: rgba(255,255,255,0.92);
+      font-size: 1.02rem;
+      line-height: 1.9;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-controls {
+      position: absolute;
+      inset: auto 0 26px 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      padding: 0 16px;
+    }
+
+    .hero-arrow {
+      width: 52px;
+      height: 52px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      font-size: 1.15rem;
+      transition:
+        transform 220ms ease,
+        background-color 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .hero-arrow:hover {
+      transform: translateY(-2px) scale(1.04);
+      background: rgba(255,255,255,0.3);
+      box-shadow: 0 14px 28px rgba(24, 55, 77, 0.2);
+    }
+
+    .hero-dots {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-dots button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(255,255,255,0.45);
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .hero-dots button.is-active {
+      background: white;
+      transform: scale(1.15);
+    }
+
+    .shell {
+      width: min(1140px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 34px 0 76px;
+      overflow-x: clip;
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+      margin-top: 30px;
+      border-radius: var(--radius-xl);
+      background: var(--paper-soft);
+      border: 1px solid rgba(255,255,255,0.62);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      padding: 38px 28px;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(42px) scale(0.985);
+      transition:
+        opacity 760ms ease,
+        transform 760ms ease,
+        filter 760ms ease;
+      filter: blur(6px);
+    }
+
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    [data-reveal="soft-left"] {
+      transform: translateX(-48px) translateY(18px) scale(0.985);
+    }
+
+    [data-reveal="soft-right"] {
+      transform: translateX(48px) translateY(18px) scale(0.985);
+    }
+
+    [data-reveal="rise"] {
+      transform: translateY(58px) scale(0.98);
+    }
+
+    [data-reveal="zoom"] {
+      transform: translateY(28px) scale(0.94);
+    }
+
+    [data-reveal="float"] {
+      transform: translateY(34px) scale(0.99) rotate(-0.6deg);
+    }
+
+    [data-reveal="gentle"] {
+      transform: translateY(24px) scale(0.992);
+      transition-duration: 980ms;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .section-kicker {
+      margin: 0 0 12px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.74rem;
+      font-weight: 700;
+      opacity: 0.88;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--primary-deep);
+      font-size: clamp(2.45rem, 4.3vw, 3.85rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      font-weight: 500;
+    }
+
+
+    .section-copy {
+      margin: 12px auto 0;
+      max-width: 42rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.88;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .dedication-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.92fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .dedication-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248, 252, 255, 0.88));
+      border: 1px solid rgba(90, 141, 179, 0.12);
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        0 18px 34px rgba(73, 120, 149, 0.08);
+    }
+
+    .dedication-card blockquote {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.28;
+      color: var(--primary-deep);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .dedication-card p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .main-photo {
+      min-height: 460px;
+      border-radius: 32px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(90,141,179,0.08), rgba(255,255,255,0)),
+        url("./assets/gallery/principal-1.jpeg") center/cover no-repeat;
+      box-shadow: 0 18px 42px rgba(73, 120, 149, 0.18);
+    }
+
+    .welcome-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 860px);
+      margin: 0 auto;
+      text-align: center;
+      padding: 18px 14px 8px;
+    }
+
+    .welcome-hand {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #222;
+      font-size: clamp(1.65rem, 3.6vw, 2.45rem);
+      line-height: 1.28;
+      font-weight: 700;
+    }
+
+    .welcome-name {
+      margin: 12px 0 6px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.3rem, 8vw, 5.2rem);
+      line-height: 0.98;
+      color: var(--primary-deep);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-shadow: none;
+    }
+
+    .welcome-date {
+      margin: 0 0 22px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.15rem, 4.6vw, 3.1rem);
+      color: var(--primary-deep);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-shadow: none;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .countdown-item {
+      position: relative;
+      padding: 14px 8px 10px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.8), rgba(255,255,255,0)),
+        linear-gradient(180deg, rgba(90,141,179,0.1), rgba(90,141,179,0.02));
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+      transition:
+        opacity 620ms ease,
+        transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .welcome.is-visible .countdown-item {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .welcome.is-visible .countdown-item:nth-child(1) { transition-delay: 120ms; }
+    .welcome.is-visible .countdown-item:nth-child(2) { transition-delay: 220ms; }
+    .welcome.is-visible .countdown-item:nth-child(3) { transition-delay: 320ms; }
+    .welcome.is-visible .countdown-item:nth-child(4) { transition-delay: 420ms; }
+
+    .countdown-value {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: #111;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .countdown-label {
+      display: block;
+      margin-top: 4px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      color: #111;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .welcome-ornament {
+      margin-top: 24px;
+      width: min(100%, 520px);
+    }
+
+    .invitation-panel {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.97), rgba(252,248,241,0.94));
+      border: 16px solid var(--primary);
+      padding: 26px 18px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 24px 48px rgba(73, 120, 149, 0.12);
+    }
+
+    .invitation-panel::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 5px dotted rgba(90, 141, 179, 0.84);
+      border-radius: 24px;
+      pointer-events: none;
+    }
+
+    .invitation-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 760px);
+      margin: 0 auto;
+      text-align: center;
+      padding: 12px 10px 8px;
+    }
+
+    .ornament-art {
+      width: min(100%, 100%);
+      margin: 0 auto 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .ornament-art svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .ornament-header {
+      display: block;
+      width: min(100%, clamp(260px, 74vw, 640px));
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .ornament-art-bottom {
+      margin-top: 22px;
+    }
+
+    .ornament-image-row {
+      width: min(100%, 660px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 16px;
+    }
+
+    .ornament-side {
+      width: min(100%, 220px);
+      justify-self: center;
+    }
+
+    .ornament-center {
+      width: clamp(58px, 8vw, 86px);
+      justify-self: center;
+      align-self: center;
+    }
+
+    .ornament-image {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      filter: brightness(0) saturate(100%) invert(56%) sepia(18%) saturate(916%) hue-rotate(163deg) brightness(90%) contrast(87%);
+    }
+
+    .ornament-image--mirror {
+      transform: scaleX(-1);
+    }
+
+    .panel-label {
+      margin: 10px 0 16px;
+      font-family: "Cormorant Garamond", serif;
+      color: #111111;
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 10px rgba(17, 17, 17, 0.08);
+    }
+
+    .panel-place {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--primary-deep);
+      font-size: clamp(2.8rem, 6.4vw, 4.3rem);
+      line-height: 1.02;
+      text-shadow: none;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-photo {
+      width: min(100%, 470px);
+      margin: 24px auto 0;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(90,141,179,0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,251,255,0.92));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 18px 34px rgba(73, 120, 149, 0.12);
+    }
+
+    .panel-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 5 / 4;
+      object-fit: cover;
+    }
+
+    .panel-meta {
+      margin: 28px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #111;
+      font-size: clamp(1.65rem, 3vw, 2.15rem);
+      line-height: 1.42;
+      font-weight: 500;
+    }
+
+    .panel-meta strong {
+      font-weight: 700;
+    }
+
+    .panel-address {
+      margin: 28px auto 0;
+      max-width: 29rem;
+      font-family: "Cormorant Garamond", serif;
+      color: #111;
+      font-size: clamp(1.55rem, 2.8vw, 2rem);
+      line-height: 1.46;
+      font-weight: 500;
+    }
+
+    .gift-section {
+      text-align: center;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.88), rgba(255,255,255,0) 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(252,248,241,0.95));
+    }
+
+    .gift-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 24%, rgba(90,141,179,0.05), transparent 16%),
+        radial-gradient(circle at 82% 20%, rgba(90,141,179,0.04), transparent 18%),
+        radial-gradient(circle at 32% 82%, rgba(199,163,95,0.05), transparent 15%);
+      pointer-events: none;
+    }
+
+    .gift-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 520px);
+      margin: 0 auto;
+      padding: 12px 8px;
+    }
+
+    .gift-title {
+      margin: 0 0 26px;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--primary-deep);
+      font-size: clamp(2.8rem, 6.4vw, 4.2rem);
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-shadow: none;
+    }
+
+    .gift-icon {
+      margin: 0 auto 14px;
+      width: min(220px, 52vw);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .gift-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .gift-copy {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #111;
+      font-size: clamp(1.6rem, 2.8vw, 2.15rem);
+      line-height: 1.2;
+      font-weight: 500;
+    }
+
+    .store-card {
+      margin: 34px auto 18px;
+      width: min(260px, 72vw);
+      aspect-ratio: 1;
+      border-radius: 32px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,1), rgba(248,250,252,0.98));
+      border: 1px solid rgba(90,141,179,0.12);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 18px 34px rgba(63,105,133,0.12);
+      display: grid;
+      place-items: center;
+      padding: 22px;
+    }
+
+    .store-brand {
+      text-align: center;
+      color: #111;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    .store-brand strong {
+      display: block;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    .store-brand span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.84rem;
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    .gift-event {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #111;
+      font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+      line-height: 1.26;
+      font-weight: 500;
+    }
+
+    .pass-photo {
+      width: min(100%, 360px);
+      margin: 18px auto 0;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(90,141,179,0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,251,255,0.92));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 20px 36px rgba(73, 120, 149, 0.12);
+    }
+
+    .pass-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .pass-intro {
+      margin: 24px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #111111;
+      font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+      line-height: 1.14;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .pass-count {
+      margin: 10px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--primary-deep);
+      font-size: clamp(3rem, 6.4vw, 4.5rem);
+      line-height: 0.98;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .pass-note {
+      margin: 14px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #66859c;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .invite-section {
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.9), rgba(255,255,255,0) 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(246, 250, 255, 0.94));
+    }
+
+    .invite-section::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(90,141,179,0.12);
+      border-radius: calc(var(--radius-xl) - 8px);
+      pointer-events: none;
+    }
+
+    .invite-shell {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1060px);
+      margin: 0 auto;
+    }
+
+    .invite-layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 430px) minmax(0, 1fr);
+      gap: 26px;
+      align-items: start;
+      margin-top: 24px;
+    }
+
+    .framed-card {
+      --pass-frame-gap: 10px;
+      --pass-frame-side-width: clamp(44px, 9vw, 68px);
+      --pass-frame-top-height: clamp(92px, 18vw, 138px);
+      --pass-frame-bottom-height: clamp(44px, 9vw, 66px);
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      background: #ffffff;
+      padding: 0 18px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 24px 48px rgba(73, 120, 149, 0.12);
+    }
+
+    .framed-card::before {
+      content: none;
+    }
+
+    .framed-card-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 340px);
+      margin: 0 auto;
+      text-align: center;
+      padding:
+        calc(var(--pass-frame-top-height) + 42px)
+        calc(var(--pass-frame-side-width) + 18px)
+        calc(var(--pass-frame-bottom-height) + 42px);
+    }
+
+    .pass-card {
+      width: min(100%, 410px);
+      margin: 0 auto;
+    }
+
+    .reception-card {
+      width: min(100%, 760px);
+      margin: 0 auto;
+    }
+
+    .reception-card .framed-card-inner {
+      width: min(100%, 620px);
+    }
+
+    .reception-card .frame-piece-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background-image: none;
+      padding-top: 14px;
+    }
+
+    .reception-card .frame-piece-top .ornament-header {
+      width: min(100%, clamp(250px, 70vw, 560px));
+    }
+
+    .frame-piece {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .frame-piece-top {
+      top: 0;
+      left: var(--pass-frame-gap);
+      right: var(--pass-frame-gap);
+      height: var(--pass-frame-top-height);
+      background-image: url("./assets/decorativos/marco-header.png");
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: 100% auto;
+    }
+
+    .frame-piece-side {
+      top: calc(var(--pass-frame-top-height) - 8px);
+      bottom: calc(var(--pass-frame-bottom-height) - 2px);
+      width: var(--pass-frame-side-width);
+      background-image: url("./assets/decorativos/marco.png");
+      background-repeat: repeat-y;
+      background-position: center top;
+      background-size: 100% auto;
+    }
+
+    .frame-piece-side--left {
+      left: var(--pass-frame-gap);
+    }
+
+    .frame-piece-side--right {
+      right: var(--pass-frame-gap);
+      transform: scaleX(-1);
+    }
+
+    .frame-piece-bottom {
+      left: var(--pass-frame-gap);
+      right: var(--pass-frame-gap);
+      bottom: 0;
+      height: var(--pass-frame-bottom-height);
+      overflow: hidden;
+    }
+
+    .frame-piece-bottom-image {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: calc(var(--pass-frame-bottom-height) * 1.02);
+      max-width: none;
+      height: auto;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      transform-origin: center center;
+      opacity: 0.98;
+    }
+
+    .reception-card .panel-label {
+      margin-top: 0;
+    }
+
+    .welcome-card {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      --pass-frame-top-height: clamp(112px, 21vw, 164px);
+    }
+
+    .welcome-card .frame-piece-top {
+      background-image: none;
+      overflow: hidden;
+    }
+
+    .welcome-card .frame-piece-top::before,
+    .welcome-card .frame-piece-top::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 52%;
+      height: 100%;
+      background-image: url("./assets/decorativos/marco-header.png");
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    }
+
+    .welcome-card .frame-piece-top::before {
+      right: 50%;
+      background-position: right top;
+    }
+
+    .welcome-card .frame-piece-top::after {
+      left: 50%;
+      background-position: left top;
+    }
+
+    .welcome-card .framed-card-inner {
+      width: min(100%, 860px);
+      padding:
+        calc(var(--pass-frame-top-height) + 44px)
+        calc(var(--pass-frame-side-width) + 22px)
+        calc(var(--pass-frame-bottom-height) + 40px);
+    }
+
+    .pass-photo--compact {
+      width: min(100%, 270px);
+      margin-top: 0;
+    }
+
+    .pass-guest-name {
+      margin-top: 18px;
+    }
+
+    .pass-count-label {
+      margin: 18px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #111111;
+      font-size: clamp(1.4rem, 2.8vw, 1.95rem);
+      line-height: 1.16;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .pass-table-label {
+      margin: 16px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--muted);
+      font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pass-table {
+      margin: 8px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--primary-deep);
+      font-size: clamp(2rem, 4.8vw, 3rem);
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .pass-empty {
+      text-align: center;
+      padding: 8px 0 0;
+    }
+
+    .pass-empty p {
+      margin: 12px auto 0;
+      max-width: 32rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    .rsvp-section {
+      position: relative;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.9), rgba(255,255,255,0) 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(246, 250, 255, 0.94));
+    }
+
+    .rsvp-section::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(90,141,179,0.12);
+      border-radius: calc(var(--radius-xl) - 8px);
+      pointer-events: none;
+    }
+
+    .rsvp-shell {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 800px);
+      margin: 0 auto;
+    }
+
+    .rsvp-search {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .rsvp-label {
+      font-weight: 500;
+      color: var(--primary-deep);
+      letter-spacing: 0.03em;
+      font-size: 1rem;
+    }
+
+    .rsvp-input,
+    .rsvp-textarea {
+      width: 100%;
+      border: 1px solid rgba(90,141,179,0.22);
+      border-radius: 18px;
+      padding: 16px 18px;
+      font: inherit;
+      color: var(--ink);
+      background: rgba(255,255,255,0.96);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.82);
+    }
+
+    .rsvp-input:focus,
+    .rsvp-textarea:focus {
+      outline: 2px solid rgba(90,141,179,0.18);
+      border-color: rgba(90,141,179,0.42);
+    }
+
+    .rsvp-results {
+      display: grid;
+      gap: 10px;
+    }
+
+    .rsvp-result {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(90,141,179,0.14);
+      border-radius: 22px;
+      padding: 15px 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(248,251,255,0.88));
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.84);
+    }
+
+    .rsvp-result:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 28px rgba(83,121,149,0.1);
+      border-color: rgba(90,141,179,0.35);
+    }
+
+    .rsvp-result strong {
+      display: block;
+      color: var(--primary-deep);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .rsvp-result span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .rsvp-card {
+      display: none;
+      margin-top: 24px;
+      border-radius: 32px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.99), rgba(246, 251, 255, 0.95));
+      border: 1px solid rgba(90,141,179,0.16);
+      padding: 30px 26px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 24px 44px rgba(83,121,149,0.12);
+    }
+
+    .rsvp-card.is-visible {
+      display: block;
+    }
+
+    .rsvp-card--static {
+      display: block;
+      margin-top: 0;
+      height: 100%;
+    }
+
+    .rsvp-name {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--primary-deep);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      text-align: center;
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .rsvp-pass {
+      margin: 10px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #111;
+      font-size: clamp(1.45rem, 2.5vw, 1.95rem);
+      line-height: 1.22;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .rsvp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .rsvp-box {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,251,255,0.9));
+      border: 1px solid rgba(90,141,179,0.12);
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.9),
+        0 10px 20px rgba(83,121,149,0.04);
+    }
+
+    .rsvp-box h3 {
+      margin: 0 0 14px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.9rem;
+      color: var(--primary-deep);
+      letter-spacing: -0.01em;
+      font-weight: 500;
+    }
+
+    .rsvp-options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .rsvp-select-wrap {
+      position: relative;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,253,0.92));
+      border: 1px solid rgba(90,141,179,0.12);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.92),
+        0 16px 30px rgba(73,120,149,0.08);
+      padding: 10px 16px 12px;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .rsvp-select-wrap:hover,
+    .rsvp-select-wrap.is-open {
+      transform: translateY(-1px);
+      border-color: rgba(90,141,179,0.22);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.92),
+        0 18px 34px rgba(73,120,149,0.1);
+    }
+
+    .rsvp-select-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .rsvp-select-trigger {
+      width: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--primary-deep);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.35rem;
+      line-height: 1.3;
+      font-weight: 600;
+      padding: 0 42px 0 0;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .rsvp-select-wrap::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid rgba(70,115,148,0.78);
+      border-bottom: 2px solid rgba(70,115,148,0.78);
+      transform: translateY(-65%) rotate(45deg);
+      pointer-events: none;
+      transition: transform 180ms ease;
+    }
+
+    .rsvp-select-wrap.is-open::after {
+      transform: translateY(-30%) rotate(225deg);
+    }
+
+    .rsvp-select-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 10px);
+      z-index: 8;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      max-height: min(320px, 44vh);
+      overflow-y: auto;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.99), rgba(245,249,253,0.96));
+      border: 1px solid rgba(90,141,179,0.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.92),
+        0 24px 44px rgba(73,120,149,0.14);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(90,141,179,0.42) rgba(255,255,255,0.7);
+    }
+
+    .rsvp-select-menu[hidden] {
+      display: none;
+    }
+
+    .rsvp-select-menu::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .rsvp-select-menu::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.72);
+      border-radius: 999px;
+    }
+
+    .rsvp-select-menu::-webkit-scrollbar-thumb {
+      background: rgba(90,141,179,0.34);
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.8);
+    }
+
+    .rsvp-select-option {
+      width: 100%;
+      border: 0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(249,252,255,0.9));
+      color: var(--ink);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.08rem;
+      line-height: 1.35;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.88);
+    }
+
+    .rsvp-select-option:hover,
+    .rsvp-select-option:focus-visible {
+      transform: translateY(-1px);
+      background:
+        linear-gradient(180deg, rgba(232,243,251,0.96), rgba(246,250,254,0.94));
+      box-shadow: 0 14px 24px rgba(73,120,149,0.1);
+    }
+
+    .rsvp-select-option.is-selected {
+      background:
+        linear-gradient(135deg, rgba(141,187,218,0.28), rgba(90,141,179,0.14));
+      color: var(--primary-deep);
+    }
+
+    .rsvp-textarea {
+      min-height: 170px;
+      resize: vertical;
+    }
+
+    .rsvp-submit {
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .rsvp-note {
+      margin-top: 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    .family-message {
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.85), rgba(255,255,255,0) 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.9), rgba(252, 248, 241, 0.92));
+    }
+
+    .family-message::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(90,141,179,0.06), transparent 18%),
+        radial-gradient(circle at 82% 24%, rgba(90,141,179,0.05), transparent 20%),
+        radial-gradient(circle at 30% 78%, rgba(199,163,95,0.05), transparent 16%);
+      pointer-events: none;
+    }
+
+    .family-message-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 620px);
+      margin: 0 auto;
+      text-align: center;
+      padding: 12px 8px;
+    }
+
+    .family-line {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #66859c;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      line-height: 1.34;
+      font-weight: 500;
+    }
+
+    .family-heading {
+      margin: 14px 0 12px;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--primary-deep);
+      font-size: clamp(2.35rem, 5vw, 3.55rem);
+      line-height: 1.02;
+      text-shadow: none;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .family-names {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      color: #161616;
+      font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+      line-height: 1.42;
+      font-weight: 700;
+    }
+
+    .family-spacer {
+      height: 22px;
+    }
+
+    .family-card {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      --pass-frame-top-height: var(--pass-frame-bottom-height);
+    }
+
+    .family-card .framed-card-inner {
+      width: min(100%, 620px);
+      padding:
+        calc(var(--pass-frame-top-height) + 34px)
+        calc(var(--pass-frame-side-width) + 18px)
+        calc(var(--pass-frame-bottom-height) + 34px);
+    }
+
+    .family-card .frame-piece-top {
+      background-image: none;
+      overflow: hidden;
+    }
+
+    .family-top-border-image {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: calc(var(--pass-frame-top-height) * 1.02);
+      max-width: none;
+      height: auto;
+      opacity: 0.98;
+      transform: translate(-50%, -50%) rotate(90deg);
+      transform-origin: center center;
+    }
+
+    .info-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(248,251,255,0.86));
+      border: 1px solid rgba(90, 141, 179, 0.12);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.86),
+        0 14px 28px rgba(73, 120, 149, 0.06);
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      color: var(--primary-deep);
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-weight: 600;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+      transition:
+        transform 220ms ease,
+        box-shadow 220ms ease,
+        background-position 320ms ease,
+        border-color 220ms ease;
+      background-size: 160% 160%;
+      background-position: 50% 50%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.008);
+      box-shadow: 0 18px 30px rgba(83, 121, 149, 0.16);
+      background-position: 100% 50%;
+    }
+
+    .btn-primary {
+      color: white;
+      background-image: linear-gradient(135deg, #8dbbda 0%, #5A8DB3 44%, #446f8f 100%);
+      border: 1px solid rgba(255,255,255,0.26);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.24),
+        0 14px 24px rgba(90,141,179,0.18);
+    }
+
+    .btn-secondary {
+      color: var(--primary-deep);
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(236, 246, 253, 0.96));
+      border: 1px solid rgba(90,141,179,0.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        0 12px 22px rgba(90,141,179,0.06);
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px 0 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 920px) {
+      .dedication-grid,
+      .rsvp-grid,
+      .invite-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .main-photo {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .invitation-gate {
+        padding: 14px;
+      }
+
+      .gate-card {
+        padding: 26px 16px 22px;
+      }
+
+      .gate-seal {
+        width: 78px;
+        height: 78px;
+        margin-bottom: 18px;
+        font-size: 2rem;
+      }
+
+      .gate-script {
+        font-size: clamp(2rem, 9vw, 3rem);
+      }
+
+      .gate-title {
+        font-size: clamp(2.35rem, 10vw, 3.35rem);
+      }
+
+      .gate-copy {
+        font-size: 0.94rem;
+        line-height: 1.7;
+      }
+
+      .gate-btn {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .gate-envelope {
+        border-radius: 28px;
+        padding: 12px;
+      }
+
+      .gate-envelope::before {
+        inset: 12px;
+        border-radius: 22px;
+      }
+
+      .gate-envelope::after {
+        top: 12px;
+        width: calc(100% - 24px);
+      }
+
+      .shell {
+        width: calc(100% - 14px);
+        max-width: 1160px;
+        padding: 24px 0 52px;
+      }
+
+      .hero-pill {
+        gap: 8px;
+        padding: 10px 14px;
+        font-size: 0.72rem;
+      }
+
+      .hero-pill::before,
+      .hero-pill::after {
+        width: 18px;
+      }
+
+      .hero-slide {
+        padding: 20px 14px 92px;
+      }
+
+      .hero-overlay {
+        gap: 16px;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 14vw, 4.8rem);
+      }
+
+      .hero-script {
+        font-size: clamp(1.9rem, 9vw, 3rem);
+      }
+
+      .hero-text {
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      .hero-controls {
+        gap: 10px;
+        inset: auto 0 18px 0;
+      }
+
+      .hero-arrow {
+        width: 44px;
+        height: 44px;
+      }
+
+      .section {
+        margin-top: 22px;
+        padding: 26px 16px;
+        border-radius: 24px;
+      }
+
+      .section-title {
+        font-size: clamp(2.1rem, 10vw, 2.8rem);
+      }
+
+      .section-copy {
+        font-size: 0.94rem;
+        line-height: 1.7;
+      }
+
+      .dedication-card {
+        padding: 22px 18px;
+      }
+
+      .dedication-card blockquote {
+        font-size: clamp(1.75rem, 8vw, 2.4rem);
+      }
+
+      .main-photo {
+        min-height: 300px;
+      }
+
+      .panel-photo {
+        width: min(100%, 100%);
+        margin-top: 20px;
+        border-radius: 22px;
+      }
+
+      .pass-photo {
+        width: min(100%, 300px);
+        border-radius: 24px;
+      }
+
+      .ornament-image-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        justify-items: center;
+      }
+
+      .ornament-side {
+        width: min(100%, 180px);
+      }
+
+      .ornament-center {
+        width: 56px;
+      }
+
+      .panel-place {
+        font-size: clamp(2.3rem, 10vw, 3.2rem);
+        line-height: 1.06;
+      }
+
+      .panel-meta,
+      .panel-address {
+        font-size: clamp(1.35rem, 5.8vw, 1.75rem);
+      }
+
+      .invite-layout {
+        gap: 18px;
+      }
+
+      .pass-card {
+        width: 100%;
+      }
+
+      .rsvp-card {
+        padding: 22px 16px;
+      }
+
+      .rsvp-box {
+        padding: 18px 14px;
+      }
+
+      .rsvp-box h3 {
+        font-size: 1.6rem;
+      }
+
+      .rsvp-select-trigger {
+        font-size: 1.18rem;
+      }
+
+      .rsvp-select-menu {
+        max-height: min(250px, 38vh);
+      }
+
+      .rsvp-select-option {
+        font-size: 1rem;
+        padding: 11px 12px;
+      }
+
+      .rsvp-textarea {
+        min-height: 140px;
+      }
+
+      .btn,
+      .rsvp-submit .btn,
+      .actions .btn {
+        width: 100%;
+      }
+
+      .framed-card {
+        padding: 0 10px;
+      }
+
+      .framed-card-inner {
+        padding:
+          calc(var(--pass-frame-top-height) + 28px)
+          calc(var(--pass-frame-side-width) + 12px)
+          calc(var(--pass-frame-bottom-height) + 28px);
+      }
+
+      .panel-meta,
+      .panel-address,
+      .family-line,
+      .family-names,
+      .gift-copy,
+      .gift-event,
+      .rsvp-pass {
+        letter-spacing: 0;
+      }
+
+      .invitation-panel {
+        border-width: 12px;
+        padding: 22px 10px;
+      }
+
+      .invitation-panel::before {
+        inset: 7px;
+      }
+
+      .welcome-card .framed-card-inner {
+        padding:
+          calc(var(--pass-frame-top-height) + 30px)
+          calc(var(--pass-frame-side-width) + 14px)
+          calc(var(--pass-frame-bottom-height) + 28px);
+      }
+
+      .family-card .framed-card-inner {
+        padding:
+          calc(var(--pass-frame-top-height) + 28px)
+          calc(var(--pass-frame-side-width) + 14px)
+          calc(var(--pass-frame-bottom-height) + 28px);
+      }
+
+      .countdown {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .actions {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body class="modal-open">
+  <div class="invitation-gate" id="invitation-gate" aria-modal="true" role="dialog" aria-labelledby="gate-title">
+    <div class="gate-envelope">
+      <div class="gate-card">
+        <div class="gate-seal" aria-hidden="true">L</div>
+        <p class="gate-kicker">Invitaci&oacute;n Especial</p>
+        <p class="gate-script">Con amor</p>
+        <h1 class="gate-title" id="gate-title">Bautizo de Liam Matias</h1>
+        <div class="gate-actions">
+          <button class="btn btn-primary gate-btn" type="button" id="open-invitation-button">Abrir invitaci&oacute;n</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="page is-hidden" id="page-content">
+    <section class="hero" data-hero-carousel>
+      <div class="hero-track">
+        <article class="hero-slide" data-tone="soft" style="background-image: url('./assets/gallery/hero-1.jpeg');">
+          <div class="hero-overlay">
+            <p class="hero-pill">Mi Bautizo</p>
+            <p class="hero-script">Una celebracion para recordar</p>
+            <h1 class="hero-title">Liam Matias</h1>
+            <p class="hero-text">
+              Con la bendicion de Dios y el amor de nuestra familia,
+              queremos compartir contigo este momento tan especial.
+            </p>
+          </div>
+        </article>
+
+        <article class="hero-slide" data-tone="medium" style="background-image: linear-gradient(180deg, rgba(90,141,179,0.2), rgba(90,141,179,0.1)), url('./assets/gallery/hero-2.jpeg');">
+          <div class="hero-overlay">
+            <p class="hero-pill">Con Amor</p>
+            <p class="hero-script">Nos encantara compartirlo contigo</p>
+            <h2 class="hero-title">21 Jun 2026</h2>
+            <p class="hero-text">
+              
+            </p>
+          </div>
+        </article>
+
+        <article class="hero-slide" data-tone="deep" style="background-image: linear-gradient(180deg, rgba(90,141,179,0.18), rgba(90,141,179,0.16)), url('./assets/gallery/hero-3.jpeg');">
+          <div class="hero-overlay">
+            <p class="hero-pill">Un Dia Especial</p>
+            <p class="hero-script">Fe, familia y un recuerdo hermoso</p>
+            <h2 class="hero-title">Liam Matias</h2>
+            <p class="hero-text">
+              Acompa&ntilde;anos a celebrar el bautizo de
+              nuestro peque&ntilde;o. 
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="hero-controls">
+        <button class="hero-arrow" type="button" data-action="prev" aria-label="Anterior">&#10094;</button>
+        <div class="hero-dots" aria-label="Indicadores del carrusel"></div>
+        <button class="hero-arrow" type="button" data-action="next" aria-label="Siguiente">&#10095;</button>
+      </div>
+    </section>
+
+    <div class="shell">
+      <section class="section" data-reveal="soft-left">
+        <div class="section-header">
+          <p class="section-kicker">Dedicatoria</p>
+          <h2 class="section-title">Una luz para toda su vida</h2>
+        </div>
+
+        <div class="dedication-grid">
+          <article class="dedication-card">
+            <blockquote>
+              &ldquo;Que en este d&iacute;a tan especial, la luz de Dios se encienda en mi coraz&oacute;n
+              para iluminar mi camino por siempre.&rdquo;
+            </blockquote>
+            <p>
+              Con inmensa alegr&iacute;a compartimos este momento de fe y amor junto a quienes
+              forman parte de nuestra vida.
+            </p>
+          </article>
+
+          <div class="main-photo" aria-label="Foto principal del festejado"></div>
+        </div>
+      </section>
+
+      <section class="section welcome" data-reveal="zoom">
+        <div class="framed-card welcome-card">
+          <div class="frame-piece frame-piece-top" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-side frame-piece-side--left" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-side frame-piece-side--right" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-bottom" aria-hidden="true">
+            <img class="frame-piece-bottom-image" src="./assets/decorativos/marco.png" alt="">
+          </div>
+          <div class="framed-card-inner welcome-inner">
+            <p class="welcome-hand">Bienvenidos al bautizo<br>de nuestro peque&ntilde;o</p>
+            <h2 class="welcome-name">Liam Matias</h2>
+            <p class="welcome-date">21 &#8226; Junio &#8226; 2026</p>
+
+            <div class="countdown" data-target-date="2026-06-21T13:00:00-06:00">
+              <article class="countdown-item">
+                <span class="countdown-value" data-unit="days">0</span>
+                <span class="countdown-label">Dias</span>
+              </article>
+              <article class="countdown-item">
+                <span class="countdown-value" data-unit="hours">0</span>
+                <span class="countdown-label">Hrs.</span>
+              </article>
+              <article class="countdown-item">
+                <span class="countdown-value" data-unit="minutes">0</span>
+                <span class="countdown-label">Min.</span>
+              </article>
+              <article class="countdown-item">
+                <span class="countdown-value" data-unit="seconds">0</span>
+                <span class="countdown-label">Seg.</span>
+              </article>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="section family-message" data-reveal="gentle">
+        <div class="framed-card family-card">
+          <div class="frame-piece frame-piece-top" aria-hidden="true">
+            <img class="family-top-border-image" src="./assets/decorativos/marco.png" alt="">
+          </div>
+          <div class="frame-piece frame-piece-side frame-piece-side--left" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-side frame-piece-side--right" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-bottom" aria-hidden="true">
+            <img class="frame-piece-bottom-image" src="./assets/decorativos/marco.png" alt="">
+          </div>
+          <div class="framed-card-inner family-message-inner">
+            <p class="family-line">Con amor y gratitud,</p>
+            <p class="family-line">acompa&ntilde;ado de</p>
+            <h2 class="family-heading">Mis Pap&aacute;s</h2>
+            <p class="family-names">Ana Paulina Velazquez<br>Walter Gomez</p>
+
+            <div class="family-spacer" aria-hidden="true"></div>
+
+            <p class="family-line">y junto a,</p>
+            <h2 class="family-heading">Mis Padrinos</h2>
+            <p class="family-names">Alexis Gonz&aacute;lez<br>Maritza de la Rosa<br>Alejandra Velazquez</p>
+
+            <div class="family-spacer" aria-hidden="true"></div>
+
+            <p class="family-line">unen hoy sus corazones y</p>
+            <p class="family-line">oraciones para guiarme</p>
+            <p class="family-line">por el camino de la fe</p>
+            <p class="family-line">y el amor de Dios.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" data-reveal="soft-right">
+        <div class="section-header">
+          <p class="section-kicker">Acomp&aacute;&ntilde;anos</p>
+        </div>
+
+        <div class="framed-card reception-card">
+          <div class="frame-piece frame-piece-top" aria-hidden="true">
+            <img class="ornament-header" src="./assets/decorativos/encabezado.png" alt="">
+          </div>
+          <div class="frame-piece frame-piece-side frame-piece-side--left" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-side frame-piece-side--right" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-bottom" aria-hidden="true">
+            <img class="frame-piece-bottom-image" src="./assets/decorativos/marco.png" alt="">
+          </div>
+          <div class="framed-card-inner">
+            <p class="panel-label">Misa</p>
+            <h2 class="panel-place">Parroquia Ntra Sra<br>de Guadalupe y<br>San Miguel Arcangel</h2>
+
+            <figure class="panel-photo">
+              <img src="./assets/iglesia/image.png" alt="Foto de la iglesia">
+            </figure>
+
+            <p class="panel-meta"><strong>Hora:</strong> 12:00 p.m.</p>
+
+            <p class="panel-address">
+              <strong>Direcci&oacute;n:</strong><br>
+              12A. Pte. Sur,<br>
+              Guadalupe,<br>
+              30479 Villaflores, Chis.
+            </p>
+
+            <div class="actions" style="justify-content:center; margin-top: 28px;">
+              <a class="btn btn-primary" href="https://maps.app.goo.gl/Jm9nyMxDz7Hfd7Fk6" target="_blank" rel="noreferrer">Ver ubicaci&oacute;n</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" data-reveal="soft-left">
+        <div class="framed-card reception-card">
+          <div class="frame-piece frame-piece-top" aria-hidden="true">
+            <img class="ornament-header" src="./assets/decorativos/encabezado.png" alt="">
+          </div>
+          <div class="frame-piece frame-piece-side frame-piece-side--left" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-side frame-piece-side--right" aria-hidden="true"></div>
+          <div class="frame-piece frame-piece-bottom" aria-hidden="true">
+            <img class="frame-piece-bottom-image" src="./assets/decorativos/marco.png" alt="">
+          </div>
+          <div class="framed-card-inner">
+            <p class="panel-label">Recepci&oacute;n</p>
+            <h2 class="panel-place">Nova Olivos<br>Montiel</h2>
+
+            <figure class="panel-photo">
+              <img src="./assets/salon/image.png" alt="Foto del sal&oacute;n de recepci&oacute;n">
+            </figure>
+
+            <p class="panel-meta"><strong>Hora:</strong> 1:00 p.m.</p>
+
+            <p class="panel-address">
+              <strong>Direcci&oacute;n:</strong><br>
+              Camino a la Sirena,<br>
+              carretera COBACH,<br>
+              30470 Villaflores, Chis.
+            </p>
+
+            <div class="actions" style="justify-content:center; margin-top: 28px;">
+              <a class="btn btn-primary" href="https://maps.app.goo.gl/rV7CCndZp9mFjvc27" target="_blank" rel="noreferrer">Ver ubicaci&oacute;n</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section gift-section" data-reveal="float">
+        <div class="gift-inner">
+          <h2 class="gift-title">Mesa de Regalos</h2>
+
+          <div class="store-card" aria-label="Liverpool">
+            <div class="store-brand">
+              <strong>Liverpool</strong>
+              <span></span>
+            </div>
+          </div>
+
+          <p class="gift-event">Evento<br>#510289</p>
+
+          <div class="actions" style="justify-content:center; margin-top: 18px;">
+            <a class="btn btn-primary" href="https://www.liverpool.com.mx/tienda/home" target="_blank" rel="noreferrer">Ver regalos</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section invite-section" data-reveal="rise">
+        <div class="invite-shell">
+          <div class="section-header">
+            <p class="section-kicker">Confirmaci&oacute;n de Asistencia</p>
+            <h2 class="section-title">Tu Pase</h2>
+            
+          </div>
+
+          <div class="pass-empty" id="invite-empty">
+            <h3 class="rsvp-name">Invitaci&oacute;n no encontrada</h3>
+            <p>
+              Abre esta invitaci&oacute;n usando un enlace con identificador, por ejemplo
+              <strong>?id=familia-perez</strong> o la ruta personalizada de tu invitado.
+            </p>
+          </div>
+
+          <div class="invite-layout" id="invite-layout" hidden>
+            <section class="framed-card pass-card">
+              <div class="frame-piece frame-piece-top" aria-hidden="true"></div>
+              <div class="frame-piece frame-piece-side frame-piece-side--left" aria-hidden="true"></div>
+              <div class="frame-piece frame-piece-side frame-piece-side--right" aria-hidden="true"></div>
+              <div class="frame-piece frame-piece-bottom" aria-hidden="true">
+                <img class="frame-piece-bottom-image" src="./assets/decorativos/marco.png" alt="">
+              </div>
+              <div class="framed-card-inner pass-card-inner">
+                <figure class="pass-photo pass-photo--compact">
+                  <img src="./assets/gallery/principal-1.jpeg" alt="Foto principal de Liam Matias">
+                </figure>
+
+                <h2 class="panel-place pass-guest-name" id="selected-guest-name">Invitado</h2>
+                <p class="pass-count-label">Pase para</p>
+                <p class="pass-count" id="selected-guest-pass">0 Personas</p>
+                <p class="pass-table-label">Mesa</p>
+                <p class="pass-table" id="selected-guest-table">-</p>
+                <p class="pass-note">Pase &uacute;nico e intransferible</p>
+              </div>
+            </section>
+
+            <section class="rsvp-card rsvp-card--static" id="rsvp-card" aria-live="polite">
+              <div class="rsvp-grid">
+                <div class="rsvp-box">
+                  <h3>Confirmar asistencia</h3>
+                  <div class="rsvp-options">
+                    <div class="rsvp-select-wrap" id="attendance-select-wrap">
+                      <label class="rsvp-select-label" for="attendance-select">Selecciona tu respuesta</label>
+                      <button class="rsvp-select-trigger" type="button" id="attendance-select" aria-haspopup="listbox" aria-expanded="false">
+                        Elige una opci&oacute;n
+                      </button>
+                      <div class="rsvp-select-menu" id="attendance-menu" role="listbox" hidden></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rsvp-box">
+                  <h3>Ded&iacute;cale unas palabras</h3>
+                  <textarea class="rsvp-textarea" id="guest-message" placeholder="Escribe aqu&iacute; un mensaje bonito para Liam Matias..."></textarea>
+                </div>
+              </div>
+
+              <div class="rsvp-submit">
+                <button class="btn btn-primary" type="button" id="confirm-button">Guardar confirmaci&oacute;n</button>
+              </div>
+              <p class="rsvp-note" id="rsvp-feedback">
+                Te agradecemos mucho confirmar tu asistencia.
+              </p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <footer>Con amor te esperamos para celebrar juntos este d&iacute;a tan especial.</footer>
+    </div>
+  </main>
+
+  <script src="./firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="./app-data.js"></script>
+  <script>
+    (function () {
+      var gate = document.getElementById("invitation-gate");
+      var openButton = document.getElementById("open-invitation-button");
+      var page = document.getElementById("page-content");
+
+      if (!gate || !openButton || !page) return;
+
+      function openInvitation() {
+        gate.classList.add("is-closing");
+        page.classList.remove("is-hidden");
+        document.body.classList.remove("modal-open");
+
+        window.setTimeout(function () {
+          gate.hidden = true;
+        }, 760);
+      }
+
+      openButton.addEventListener("click", openInvitation);
+    })();
+
+    (function () {
+      var hero = document.querySelector("[data-hero-carousel]");
+      if (!hero) return;
+
+      var track = hero.querySelector(".hero-track");
+      var slides = Array.prototype.slice.call(track.children);
+      var dotsContainer = hero.querySelector(".hero-dots");
+      var current = 0;
+      var timer = null;
+
+      slides.forEach(function (_, index) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.setAttribute("aria-label", "Ir a la diapositiva " + (index + 1));
+        dot.addEventListener("click", function () {
+          goTo(index);
+        });
+        dotsContainer.appendChild(dot);
+      });
+
+      var dots = Array.prototype.slice.call(dotsContainer.children);
+
+      function render() {
+        track.style.transform = "translateX(-" + (current * 100) + "%)";
+        slides.forEach(function (slide, index) {
+          slide.classList.toggle("is-active", index === current);
+        });
+        dots.forEach(function (dot, index) {
+          dot.classList.toggle("is-active", index === current);
+        });
+      }
+
+      function goTo(nextIndex) {
+        current = (nextIndex + slides.length) % slides.length;
+        render();
+        restart();
+      }
+
+      function next() {
+        goTo(current + 1);
+      }
+
+      function prev() {
+        goTo(current - 1);
+      }
+
+      function start() {
+        timer = window.setInterval(next, 5000);
+      }
+
+      function stop() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function restart() {
+        stop();
+        start();
+      }
+
+      hero.querySelector("[data-action='next']").addEventListener("click", next);
+      hero.querySelector("[data-action='prev']").addEventListener("click", prev);
+      hero.addEventListener("mouseenter", stop);
+      hero.addEventListener("mouseleave", start);
+      hero.addEventListener("touchstart", stop, { passive: true });
+      hero.addEventListener("touchend", start, { passive: true });
+
+      render();
+      start();
+    })();
+
+    (function () {
+      var countdown = document.querySelector("[data-target-date]");
+      if (!countdown) return;
+
+      var target = new Date(countdown.getAttribute("data-target-date")).getTime();
+      var daysNode = countdown.querySelector("[data-unit='days']");
+      var hoursNode = countdown.querySelector("[data-unit='hours']");
+      var minutesNode = countdown.querySelector("[data-unit='minutes']");
+      var secondsNode = countdown.querySelector("[data-unit='seconds']");
+
+      function update() {
+        var now = Date.now();
+        var diff = Math.max(0, target - now);
+
+        var days = Math.floor(diff / 86400000);
+        var hours = Math.floor((diff % 86400000) / 3600000);
+        var minutes = Math.floor((diff % 3600000) / 60000);
+        var seconds = Math.floor((diff % 60000) / 1000);
+
+        daysNode.textContent = String(days);
+        hoursNode.textContent = String(hours).padStart(2, "0");
+        minutesNode.textContent = String(minutes).padStart(2, "0");
+        secondsNode.textContent = String(seconds).padStart(2, "0");
+      }
+
+      update();
+      window.setInterval(update, 1000);
+    })();
+
+    (function () {
+      var inviteLayout = document.getElementById("invite-layout");
+      var emptyState = document.getElementById("invite-empty");
+      var selectedName = document.getElementById("selected-guest-name");
+      var selectedPass = document.getElementById("selected-guest-pass");
+      var selectedTable = document.getElementById("selected-guest-table");
+      var attendanceSelect = document.getElementById("attendance-select");
+      var attendanceSelectWrap = document.getElementById("attendance-select-wrap");
+      var attendanceMenu = document.getElementById("attendance-menu");
+      var messageField = document.getElementById("guest-message");
+      var feedback = document.getElementById("rsvp-feedback");
+      var confirmButton = document.getElementById("confirm-button");
+      var activeGuest = null;
+      var selectedAttendanceValue = "";
+      var dataApi = window.AppData;
+
+      if (!inviteLayout) return;
+
+      function getInviteId() {
+        var params = new URLSearchParams(window.location.search);
+        var queryId = params.get("id");
+        if (queryId) return queryId;
+
+        var path = window.location.pathname.replace(/\/+$/, "");
+        var lastSegment = path.split("/").filter(Boolean).pop();
+        if (!lastSegment || lastSegment.toLowerCase() === "index.html") {
+          return "";
+        }
+
+        return decodeURIComponent(lastSegment);
+      }
+
+      function setEmptyState(message) {
+        emptyState.querySelector("p").innerHTML = message;
+        emptyState.hidden = false;
+        inviteLayout.hidden = true;
+      }
+
+      function renderAttendanceOptions(guest) {
+        attendanceMenu.innerHTML = "";
+        selectedAttendanceValue = "";
+        attendanceSelect.textContent = "Elige una opci\u00f3n";
+        attendanceSelect.dataset.value = "";
+        attendanceSelect.setAttribute("aria-expanded", "false");
+        attendanceSelectWrap.classList.remove("is-open");
+        attendanceMenu.hidden = true;
+
+        for (var i = 1; i <= guest.passSize; i += 1) {
+          createAttendanceOption(
+            String(i),
+            i + " persona" + (i > 1 ? "s" : "") + " asistir" + (i > 1 ? "an" : "a")
+          );
+        }
+
+        createAttendanceOption("decline", "Lo siento, no podremos asistir");
+      }
+
+      function createAttendanceOption(value, label) {
+        var option = document.createElement("button");
+        option.type = "button";
+        option.className = "rsvp-select-option";
+        option.setAttribute("role", "option");
+        option.dataset.value = value;
+        option.textContent = label;
+        option.addEventListener("click", function () {
+          setAttendanceValue(value, label);
+          closeAttendanceMenu();
+        });
+        attendanceMenu.appendChild(option);
+      }
+
+      function setAttendanceValue(value, label) {
+        selectedAttendanceValue = value || "";
+        attendanceSelect.dataset.value = selectedAttendanceValue;
+        attendanceSelect.textContent = label || "Elige una opci\u00f3n";
+
+        Array.prototype.forEach.call(attendanceMenu.querySelectorAll(".rsvp-select-option"), function (option) {
+          option.classList.toggle("is-selected", option.dataset.value === selectedAttendanceValue);
+          option.setAttribute("aria-selected", option.dataset.value === selectedAttendanceValue ? "true" : "false");
+        });
+      }
+
+      function openAttendanceMenu() {
+        attendanceMenu.hidden = false;
+        attendanceSelectWrap.classList.add("is-open");
+        attendanceSelect.setAttribute("aria-expanded", "true");
+      }
+
+      function closeAttendanceMenu() {
+        attendanceMenu.hidden = true;
+        attendanceSelectWrap.classList.remove("is-open");
+        attendanceSelect.setAttribute("aria-expanded", "false");
+      }
+
+      function findAttendanceLabel(value) {
+        var option = attendanceMenu.querySelector('.rsvp-select-option[data-value="' + value + '"]');
+        return option ? option.textContent : "Elige una opci\u00f3n";
+      }
+
+      function resetFormState() {
+        selectedAttendanceValue = "";
+        attendanceSelect.dataset.value = "";
+        attendanceSelect.textContent = "Elige una opci\u00f3n";
+        Array.prototype.forEach.call(attendanceMenu.querySelectorAll(".rsvp-select-option"), function (option) {
+          option.classList.remove("is-selected");
+          option.setAttribute("aria-selected", "false");
+        });
+        closeAttendanceMenu();
+        messageField.value = "";
+      }
+
+      function hydrateSavedState(guest) {
+        return dataApi.getRsvp(guest.id).then(function (saved) {
+          if (!saved) {
+            resetFormState();
+            feedback.textContent = "Nos encantar\u00e1 contar con su compa\u00f1\u00eda. Agradeceremos confirme el n\u00famero de asistentes y, si gusta, nos deje un mensaje.";
+            return;
+          }
+
+          resetFormState();
+          if (saved.attendance) {
+            setAttendanceValue(saved.attendance, findAttendanceLabel(saved.attendance));
+          }
+          messageField.value = saved.message || "";
+          feedback.textContent = "Ya ten\u00edamos una confirmaci\u00f3n guardada para este pase.";
+        }).catch(function () {
+          resetFormState();
+          messageField.value = "";
+          feedback.textContent = "Nos encantar\u00e1 contar con su compa\u00f1\u00eda. Agradeceremos confirme el n\u00famero de asistentes y, si gusta, nos deje un mensaje.";
+        });
+      }
+
+      function showGuest(guest) {
+        activeGuest = guest;
+        selectedName.textContent = guest.name;
+        selectedPass.textContent = guest.passSize + " Persona" + (guest.passSize > 1 ? "s" : "");
+        selectedTable.textContent = guest.table ? String(guest.table) : "-";
+        renderAttendanceOptions(guest);
+        emptyState.hidden = true;
+        inviteLayout.hidden = false;
+        hydrateSavedState(guest);
+      }
+
+      function getSuccessFeedback(attendanceValue) {
+        if (attendanceValue === "decline") {
+          return "Gracias por tu confirmaci\u00f3n. Lamentamos no poder contar con tu presencia.";
+        }
+
+        return "Gracias por tu confirmaci\u00f3n. Te esperamos.";
+      }
+
+      confirmButton.addEventListener("click", function () {
+        if (!activeGuest) {
+          feedback.textContent = "No encontramos un invitado v\u00e1lido para este enlace.";
+          return;
+        }
+
+        var selectedValue = selectedAttendanceValue;
+        if (!selectedValue) {
+          feedback.textContent = "Selecciona una opci\u00f3n de asistencia antes de guardar.";
+          return;
+        }
+
+        var payload = {
+          attendance: selectedValue,
+          message: messageField.value.trim()
+        };
+
+        confirmButton.disabled = true;
+        feedback.textContent = dataApi.isUsingFirestore()
+          ? "Guardando tu confirmaci\u00f3n..."
+          : "Guardando tu confirmaci\u00f3n en este dispositivo...";
+
+        dataApi.saveRsvp(activeGuest, payload).then(function (result) {
+          var successMessage = getSuccessFeedback(payload.attendance);
+
+          if (result.mode === "firestore") {
+            feedback.textContent = successMessage;
+            return;
+          }
+
+          if (result.mode === "local-fallback") {
+            feedback.textContent = successMessage + " Tu selecci\u00f3n se guard\u00f3 solo en este dispositivo. Firestore no respondi\u00f3 todav\u00eda.";
+            if (result.error) {
+              console.error("Error guardando en Firestore:", result.error);
+            }
+            return;
+          }
+
+          feedback.textContent = successMessage + " Tu selecci\u00f3n se guard\u00f3 solo en este dispositivo. Firestore a\u00fan no est\u00e1 activo.";
+        }).catch(function () {
+          feedback.textContent = "No pudimos guardar tu confirmaci\u00f3n. Intenta de nuevo.";
+        }).finally(function () {
+          confirmButton.disabled = false;
+        });
+      });
+
+      attendanceSelect.addEventListener("click", function () {
+        if (attendanceMenu.hidden) {
+          openAttendanceMenu();
+          return;
+        }
+
+        closeAttendanceMenu();
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!attendanceSelectWrap.contains(event.target)) {
+          closeAttendanceMenu();
+        }
+      });
+
+      var inviteId = getInviteId();
+      if (!inviteId) {
+        setEmptyState("Abre esta invitaci&oacute;n usando un enlace con identificador, por ejemplo <strong>?id=familia-perez</strong> o una ruta personalizada como <strong>/familia-perez</strong>.");
+        return;
+      }
+
+      function resolveGuest(guest) {
+        if (!guest) {
+          setEmptyState("No encontramos una invitaci&oacute;n para el identificador <strong>" + inviteId + "</strong>. Verifica que el enlace sea correcto.");
+          return;
+        }
+
+        showGuest(guest);
+      }
+
+      dataApi.getGuestById(inviteId)
+        .then(function (guest) {
+          resolveGuest(guest);
+        })
+        .catch(function () {
+          setEmptyState("No pudimos cargar tu invitaci&oacute;n en este momento. Intenta abrir de nuevo el enlace.");
+        });
+    })();
+
+    (function () {
+      var revealItems = document.querySelectorAll("[data-reveal]");
+      if (!revealItems.length) return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.16,
+        rootMargin: "0px 0px -40px 0px"
+      });
+
+      revealItems.forEach(function (item) {
+        observer.observe(item);
+      });
+    })();
+  </script>
+</body>
+</html>

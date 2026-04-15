@@ -1,0 +1,36 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticatedAdmin() {
+      return request.auth != null;
+    }
+
+    match /invitados/{inviteId} {
+      allow read: if true;
+      allow create, update, delete: if isAuthenticatedAdmin();
+    }
+
+    match /confirmaciones/{inviteId} {
+      allow read: if isAuthenticatedAdmin();
+      allow create, update: if
+        request.resource.data.keys().hasOnly([
+          'attendance',
+          'message',
+          'guestId',
+          'guestName',
+          'passSize',
+          'updatedAt'
+        ]) &&
+        request.resource.data.guestId == inviteId &&
+        request.resource.data.guestName is string &&
+        request.resource.data.passSize is int &&
+        request.resource.data.message is string &&
+        (
+          request.resource.data.attendance == 'decline' ||
+          request.resource.data.attendance.matches('^[0-9]+$')
+        );
+      allow delete: if isAuthenticatedAdmin();
+    }
+  }
+}

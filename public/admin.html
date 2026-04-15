@@ -1,0 +1,1340 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Invitaciones</title>
+  <meta name="description" content="Panel de administraci&oacute;n de invitados y confirmaciones">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #5A8DB3;
+      --primary-deep: #467394;
+      --paper: rgba(255, 253, 249, 0.92);
+      --paper-strong: rgba(255, 255, 255, 0.98);
+      --ink: #2b4457;
+      --muted: #66859c;
+      --success: #2f7a54;
+      --warning: #a56a2b;
+      --danger: #9b4854;
+      --shadow: 0 24px 60px rgba(63, 105, 133, 0.16);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Cormorant Garamond", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.92), transparent 34%),
+        linear-gradient(180deg, #e9f6ff 0%, #d7ebf8 28%, #f7f1e8 100%);
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 34px 0 72px;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      padding: 32px 26px;
+    }
+
+    .panel + .panel {
+      margin-top: 26px;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.76rem;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .title {
+      margin: 0;
+      color: var(--primary-deep);
+      font-size: clamp(2.6rem, 5vw, 4.1rem);
+      line-height: 1.02;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .copy {
+      margin: 12px auto 0;
+      max-width: 42rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.82;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .login-card {
+      width: min(100%, 460px);
+      margin: 0 auto;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,251,255,0.9));
+      border: 1px solid rgba(90,141,179,0.12);
+      padding: 26px 22px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 18px 34px rgba(73,120,149,0.08);
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary-deep);
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .input {
+      width: 100%;
+      border: 1px solid rgba(90,141,179,0.18);
+      border-radius: 18px;
+      padding: 15px 16px;
+      font: inherit;
+      font-size: 1.05rem;
+      color: var(--ink);
+      background: rgba(255,255,255,0.98);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.84);
+    }
+
+    .input:focus {
+      outline: 2px solid rgba(90,141,179,0.18);
+      border-color: rgba(90,141,179,0.38);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        background-position 240ms ease;
+      background-size: 160% 160%;
+      background-position: 50% 50%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background-position: 100% 50%;
+    }
+
+    .btn-primary {
+      color: white;
+      background-image: linear-gradient(135deg, #8dbbda 0%, #5A8DB3 44%, #446f8f 100%);
+      border-color: rgba(255,255,255,0.24);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.2),
+        0 14px 24px rgba(90,141,179,0.18);
+    }
+
+    .btn-secondary {
+      color: var(--primary-deep);
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(236,246,253,0.96));
+      border-color: rgba(90,141,179,0.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        0 12px 22px rgba(90,141,179,0.06);
+    }
+
+    .message {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.75;
+      font-weight: 500;
+    }
+
+    .message.error {
+      color: var(--danger);
+    }
+
+    .dashboard {
+      display: none;
+    }
+
+    .dashboard.is-visible {
+      display: block;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,251,255,0.9));
+      border: 1px solid rgba(90,141,179,0.12);
+      padding: 18px 16px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 14px 28px rgba(73,120,149,0.06);
+    }
+
+    .stat-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .stat-value {
+      display: block;
+      margin-top: 8px;
+      color: var(--primary-deep);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      font-weight: 600;
+    }
+
+    .stat-note {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .filter-chip {
+      appearance: none;
+      border: 1px solid rgba(90,141,179,0.16);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(243,249,254,0.92));
+      color: var(--primary-deep);
+      padding: 10px 16px;
+      font: inherit;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        color 180ms ease;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 10px 18px rgba(73,120,149,0.05);
+    }
+
+    .filter-chip:hover {
+      transform: translateY(-1px);
+    }
+
+    .filter-chip.is-active {
+      color: white;
+      border-color: rgba(255,255,255,0.2);
+      background: linear-gradient(135deg, #8dbbda 0%, #5A8DB3 46%, #446f8f 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        0 14px 24px rgba(90,141,179,0.18);
+    }
+
+    .guest-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.9fr) auto;
+      gap: 18px;
+      align-items: center;
+      border-radius: 26px;
+      background: var(--paper-strong);
+      border: 1px solid rgba(90,141,179,0.12);
+      padding: 18px 18px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.9),
+        0 14px 28px rgba(73,120,149,0.06);
+    }
+
+    .guest-name {
+      margin: 0;
+      color: var(--primary-deep);
+      font-size: 1.6rem;
+      line-height: 1.1;
+      font-weight: 600;
+    }
+
+    .guest-meta {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    .guest-status {
+      display: grid;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+
+    .badge.pending {
+      background: rgba(165,106,43,0.12);
+      color: var(--warning);
+      border: 1px solid rgba(165,106,43,0.18);
+    }
+
+    .badge.confirmed {
+      background: rgba(47,122,84,0.12);
+      color: var(--success);
+      border: 1px solid rgba(47,122,84,0.18);
+    }
+
+    .badge.declined {
+      background: rgba(155,72,84,0.12);
+      color: var(--danger);
+      border: 1px solid rgba(155,72,84,0.18);
+    }
+
+    .status-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    .guest-actions {
+      display: grid;
+      gap: 10px;
+      justify-items: end;
+      min-width: 170px;
+    }
+
+    .link-preview {
+      width: min(100%, 320px);
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .helper {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 960px) {
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .guest-card {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .guest-actions {
+        justify-items: start;
+        min-width: 0;
+      }
+
+      .link-preview {
+        text-align: left;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .guest-actions {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 14px, 1160px);
+        padding: 24px 0 54px;
+      }
+
+      .panel {
+        padding: 24px 16px;
+        border-radius: 24px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .title {
+        font-size: clamp(2.2rem, 7vw, 3.1rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="panel" id="login-panel">
+      <div class="heading">
+        <p class="eyebrow">Administraci&oacute;n</p>
+        <h1 class="title">Panel de Invitados</h1>
+        <p class="copy">
+          Inicia sesi&oacute;n con tu cuenta de administrador para ver las invitaciones,
+          revisar confirmaciones y copiar el enlace personalizado de cada invitado o familia.
+        </p>
+      </div>
+
+      <div class="login-card">
+        <label class="label" for="email-input">Correo de acceso</label>
+        <input class="input" id="email-input" type="email" autocomplete="username" placeholder="admin@ejemplo.com">
+        <label class="label" for="password-input" style="margin-top: 16px;">Contrase&ntilde;a</label>
+        <input class="input" id="password-input" type="password" autocomplete="current-password" placeholder="Ingresa tu contrase&ntilde;a">
+        <div class="actions">
+          <button class="btn btn-primary" type="button" id="login-button">Iniciar sesi&oacute;n</button>
+        </div>
+        <p class="message" id="login-message">Usa un usuario de Firebase Authentication con acceso de administrador.</p>
+      </div>
+    </section>
+
+    <section class="panel dashboard" id="dashboard-panel">
+      <div class="toolbar">
+        <div>
+          <p class="eyebrow">Resumen</p>
+          <h2 class="title">Invitados y Confirmaciones</h2>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn btn-secondary" type="button" id="import-guests-button">Importar invitados</button>
+          <button class="btn btn-secondary" type="button" id="logout-button">Cerrar sesi&oacute;n</button>
+        </div>
+      </div>
+
+      <div class="stats" id="stats"></div>
+      <div class="filters" id="status-filters" aria-label="Filtrar invitados por estado">
+        <button class="filter-chip is-active" type="button" data-filter="all">Todos</button>
+        <button class="filter-chip" type="button" data-filter="confirmed">Confirmados</button>
+        <button class="filter-chip" type="button" data-filter="pending">Pendientes</button>
+        <button class="filter-chip" type="button" data-filter="declined">No asisten</button>
+      </div>
+      <div class="list" id="guest-list"></div>
+      <p class="helper" id="storage-note">
+        Este panel puede leer confirmaciones desde <strong>Cloud Firestore</strong>. Si la configuraci&oacute;n
+        de Firebase todav&iacute;a no est&aacute; completa, usar&aacute; el respaldo local del navegador.
+      </p>
+    </section>
+  </main>
+
+  <script src="./admin-config.js?v=20260316-2338"></script>
+  <script src="./admin-art.js?v=20260316-2338"></script>
+  <script src="./admin-frame.js?v=20260316-2338"></script>
+  <script src="./admin-side-frame.js?v=20260316-2338"></script>
+  <script src="./admin-header-frame.js?v=20260316-2338"></script>
+  <script src="./firebase-config.js?v=20260316-2338"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="./app-data.js"></script>
+  <script>
+    (function () {
+      var loginPanel = document.getElementById("login-panel");
+      var dashboardPanel = document.getElementById("dashboard-panel");
+      var emailInput = document.getElementById("email-input");
+      var passwordInput = document.getElementById("password-input");
+      var loginButton = document.getElementById("login-button");
+      var loginMessage = document.getElementById("login-message");
+      var logoutButton = document.getElementById("logout-button");
+      var importGuestsButton = document.getElementById("import-guests-button");
+      var statsContainer = document.getElementById("stats");
+      var filtersContainer = document.getElementById("status-filters");
+      var guestList = document.getElementById("guest-list");
+      var storageNote = document.getElementById("storage-note");
+      var dataApi = window.AppData;
+      var auth = window.firebase && window.firebase.auth ? window.firebase.auth() : null;
+      var rsvpMap = {};
+      var allGuests = [];
+      var activeFilter = "all";
+      var adminArtData = window.ADMIN_ART || {};
+      var inviteArt = {};
+      var invitationDetails = {
+        childName: "Liam Matias",
+        date: "21 de Junio de 2026",
+        churchName: "Parroquia Ntra Sra de Guadalupe y San Miguel Arcangel",
+        churchTime: "12:00 p.m.",
+        churchAddress: "12A. Pte. Sur, Guadalupe, 30479 Villaflores, Chis.",
+        hallName: "Nova Olivos Montiel",
+        hallTime: "1:00 p.m.",
+        hallAddress: "Camino a la Sirena, carretera COBACH, 30470 Villaflores, Chis."
+      };
+
+      function getBaseInviteUrl() {
+        var origin = window.location.origin === "null" ? "" : window.location.origin;
+        return origin + "/?id=";
+      }
+
+      function loadImage(src) {
+        return new Promise(function (resolve, reject) {
+          var image = new Image();
+          image.crossOrigin = "anonymous";
+          image.onload = function () {
+            resolve(image);
+          };
+          image.onerror = function () {
+            reject(new Error("No se pudo cargar " + src));
+          };
+          image.src = src;
+        });
+      }
+
+      function buildInviteUrl(guest) {
+        return getBaseInviteUrl() + encodeURIComponent(guest.id);
+      }
+
+      function loadQrImage(guest) {
+        var inviteUrl = buildInviteUrl(guest);
+        var qrUrl = "https://quickchart.io/qr?text=" + encodeURIComponent(inviteUrl) + "&size=320&margin=1&ecLevel=M&format=png&dark=%235A8DB3&light=%23FFFFFF";
+
+        return loadImage(qrUrl).catch(function () {
+          return null;
+        });
+      }
+
+      function normalizeHeaderImage(image) {
+        var offscreen = document.createElement("canvas");
+        offscreen.width = image.width;
+        offscreen.height = image.height;
+
+        var offscreenContext = offscreen.getContext("2d");
+        if (!offscreenContext) {
+          return image;
+        }
+
+        offscreenContext.drawImage(image, 0, 0);
+
+        try {
+          var imageData = offscreenContext.getImageData(0, 0, offscreen.width, offscreen.height);
+          var pixels = imageData.data;
+
+          for (var index = 0; index < pixels.length; index += 4) {
+            var alpha = pixels[index + 3];
+            if (!alpha) continue;
+
+            var red = pixels[index];
+            var green = pixels[index + 1];
+            var blue = pixels[index + 2];
+            var maxChannel = Math.max(red, green, blue);
+            var minChannel = Math.min(red, green, blue);
+
+            if (minChannel >= 225 && (maxChannel - minChannel) <= 18) {
+              pixels[index] = 255;
+              pixels[index + 1] = 255;
+              pixels[index + 2] = 255;
+              pixels[index + 3] = 255;
+            }
+          }
+
+          offscreenContext.putImageData(imageData, 0, 0);
+          return offscreen;
+        } catch (error) {
+          console.warn("No se pudo normalizar el fondo del marco superior:", error);
+          return image;
+        }
+      }
+
+      function ensureInviteArt() {
+        if (inviteArt.sideFrame && inviteArt.headerFrame) {
+          return Promise.resolve(inviteArt);
+        }
+
+        return Promise.all([
+          loadImage(window.ADMIN_SIDE_FRAME || "./assets/decorativos/marco.png"),
+          loadImage(window.ADMIN_HEADER_FRAME || "./assets/decorativos/marco-header.png")
+        ]).then(function (result) {
+          inviteArt.sideFrame = result[0];
+          inviteArt.headerFrame = normalizeHeaderImage(result[1]);
+          return inviteArt;
+        });
+      }
+
+      function drawVerticalBorder(context, image, x, y, width, height, flipHorizontally) {
+        var tileHeight = Math.round(width * (image.height / image.width));
+        var currentY = y;
+
+        while (currentY < y + height) {
+          var drawHeight = Math.min(tileHeight, (y + height) - currentY);
+
+          context.save();
+          if (flipHorizontally) {
+            context.translate(x + width, currentY);
+            context.scale(-1, 1);
+            context.drawImage(
+              image,
+              0,
+              0,
+              image.width,
+              Math.round(image.height * (drawHeight / tileHeight)),
+              0,
+              0,
+              width,
+              drawHeight
+            );
+          } else {
+            context.drawImage(
+              image,
+              0,
+              0,
+              image.width,
+              Math.round(image.height * (drawHeight / tileHeight)),
+              x,
+              currentY,
+              width,
+              drawHeight
+            );
+          }
+          context.restore();
+
+          currentY += drawHeight;
+        }
+      }
+
+      function drawBottomBorder(context, image, x, y, width, targetHeight) {
+        var rotatedTileWidth = Math.round(targetHeight * (image.height / image.width));
+        var currentX = x;
+
+        while (currentX < x + width) {
+          var drawWidth = Math.min(rotatedTileWidth, (x + width) - currentX);
+
+          context.save();
+          context.translate(currentX, y + targetHeight);
+          context.rotate(-Math.PI / 2);
+          context.drawImage(
+            image,
+            0,
+            0,
+            image.width,
+            Math.round(image.height * (drawWidth / rotatedTileWidth)),
+            0,
+            0,
+            targetHeight,
+            drawWidth
+          );
+          context.restore();
+
+          currentX += drawWidth;
+        }
+      }
+
+      function drawTopBorder(context, image, x, y, width, targetHeight) {
+        var scale = Math.min(width / image.width, targetHeight / image.height);
+        var drawWidth = image.width * scale;
+        var drawHeight = image.height * scale;
+        var drawX = x + ((width - drawWidth) / 2);
+        var drawY = y + ((targetHeight - drawHeight) / 2);
+
+        context.drawImage(
+          image,
+          drawX,
+          drawY,
+          drawWidth,
+          drawHeight
+        );
+      }
+
+      function wrapText(context, text, maxWidth) {
+        var words = String(text || "").split(/\s+/).filter(Boolean);
+        var lines = [];
+        var currentLine = "";
+
+        words.forEach(function (word) {
+          var candidate = currentLine ? currentLine + " " + word : word;
+          if (context.measureText(candidate).width <= maxWidth || !currentLine) {
+            currentLine = candidate;
+          } else {
+            lines.push(currentLine);
+            currentLine = word;
+          }
+        });
+
+        if (currentLine) lines.push(currentLine);
+        return lines;
+      }
+
+      function drawWrappedBlock(context, text, x, y, maxWidth, lineHeight) {
+        var lines = wrapText(context, text, maxWidth);
+        lines.forEach(function (line, index) {
+          context.fillText(line, x, y + (index * lineHeight));
+        });
+        return y + (lines.length * lineHeight);
+      }
+
+      function drawCenteredWrappedBlock(context, text, centerX, y, maxWidth, lineHeight) {
+        var lines = wrapText(context, text, maxWidth);
+        lines.forEach(function (line, index) {
+          context.fillText(line, centerX, y + (index * lineHeight));
+        });
+        return y + (lines.length * lineHeight);
+      }
+
+      function roundRect(context, x, y, width, height, radius) {
+        context.beginPath();
+        context.moveTo(x + radius, y);
+        context.lineTo(x + width - radius, y);
+        context.quadraticCurveTo(x + width, y, x + width, y + radius);
+        context.lineTo(x + width, y + height - radius);
+        context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        context.lineTo(x + radius, y + height);
+        context.quadraticCurveTo(x, y + height, x, y + height - radius);
+        context.lineTo(x, y + radius);
+        context.quadraticCurveTo(x, y, x + radius, y);
+        context.closePath();
+      }
+
+      function drawHeaderStrip(context, image, x, y, width, height, rotation) {
+        var sourceX = 0;
+        var sourceY = 0;
+        var sourceWidth = image.width;
+        var sourceHeight = image.height;
+
+        context.save();
+        context.translate(x, y);
+        if (rotation) {
+          context.rotate(rotation);
+        }
+        context.drawImage(
+          image,
+          sourceX,
+          sourceY,
+          sourceWidth,
+          sourceHeight,
+          -width / 2,
+          -height / 2,
+          width,
+          height
+        );
+        context.restore();
+      }
+
+      function createDownloadButton(guest) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-secondary";
+        button.textContent = "Descargar invitaci\u00f3n";
+        button.addEventListener("click", function () {
+          button.disabled = true;
+          button.textContent = "Generando...";
+          storageNote.innerHTML = "Preparando la invitaci&oacute;n para <strong>" + escapeHtml(guest.name) + "</strong>...";
+
+          generateInvitationImage(guest)
+            .then(function (result) {
+              var link = document.createElement("a");
+              link.href = result.url;
+              link.download = "invitacion-" + guest.id + ".png";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              window.setTimeout(function () {
+                URL.revokeObjectURL(result.url);
+              }, 1000);
+              storageNote.innerHTML = "La invitaci&oacute;n personalizada de <strong>" + escapeHtml(guest.name) + "</strong> se descarg&oacute; correctamente.";
+            })
+            .catch(function (error) {
+              console.error("No se pudo generar la invitaci&oacute;n descargable:", error);
+              storageNote.innerHTML = "No se pudo generar la invitaci&oacute;n descargable. " + (error && error.message ? error.message : "");
+            })
+            .finally(function () {
+              button.disabled = false;
+              button.textContent = "Descargar invitaci\u00f3n";
+            });
+        });
+        return button;
+      }
+
+      function generateInvitationImage(guest) {
+        return Promise.all([
+          ensureInviteArt(),
+          loadQrImage(guest)
+        ]).then(function (result) {
+          var art = result[0];
+          var qrImage = result[1];
+          var canvas = document.createElement("canvas");
+          canvas.width = 1181;
+          canvas.height = 1772;
+          var context = canvas.getContext("2d");
+          if (!context) {
+            throw new Error("El navegador no pudo iniciar el lienzo de impresion.");
+          }
+          var baseWidth = 1566;
+          var baseHeight = 2752;
+          var scaleX = canvas.width / baseWidth;
+          var scaleY = canvas.height / baseHeight;
+          var fontScale = Math.max(Math.min(scaleX, 0.78), Math.min(scaleX, scaleY));
+          function sx(value) {
+            return value * scaleX;
+          }
+          function sy(value) {
+            return value * scaleY;
+          }
+          function sf(value) {
+            return Math.max(1, Math.round(value * fontScale));
+          }
+          var centerX = canvas.width / 2;
+          var infoColumnX = sx(225);
+          var infoColumnWidth = sx(760);
+          var qrColumnWidth = sx(300);
+          var qrColumnGap = sx(72);
+          var qrColumnX = infoColumnX + infoColumnWidth + qrColumnGap;
+          var maxTextWidth = infoColumnWidth;
+          var topBorderHeight = Math.max(sy(455), canvas.width * (art.headerFrame.height / art.headerFrame.width));
+          var topGapHeight = sy(72);
+          var sideBorderWidth = sx(126);
+          var sideBorderX = sx(22);
+          var sideBorderTopY = topBorderHeight - sy(143);
+          var bottomBorderHeight = sy(126);
+          var bottomBorderY = canvas.height - sy(178);
+          var sideBorderBottomOverlap = sy(56);
+          var sideBorderHeight = (bottomBorderY + sideBorderBottomOverlap) - sideBorderTopY;
+
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.fillStyle = "#ffffff";
+          context.fillRect(0, 0, canvas.width, canvas.height);
+
+          drawTopBorder(context, art.headerFrame, 0, 0, canvas.width, topBorderHeight);
+
+          context.fillStyle = "#ffffff";
+          context.fillRect(0, topBorderHeight, canvas.width, topGapHeight);
+
+          drawVerticalBorder(context, art.sideFrame, sideBorderX, sideBorderTopY, sideBorderWidth, sideBorderHeight, false);
+          drawVerticalBorder(context, art.sideFrame, canvas.width - (sideBorderX + sideBorderWidth), sideBorderTopY, sideBorderWidth, sideBorderHeight, true);
+          drawBottomBorder(context, art.sideFrame, 0, bottomBorderY, canvas.width, bottomBorderHeight);
+
+          var titleY = topBorderHeight + sy(56);
+          var nameY = titleY + sy(105);
+          var dateY = nameY + sy(115);
+          var inviteLineY = dateY + sy(105);
+          var guestNameY = inviteLineY + sy(140);
+          var passLabelY = guestNameY + sy(110);
+          var passCountY = passLabelY + sy(78);
+          var tableLabelY = passCountY + sy(78);
+          var tableValueY = tableLabelY + sy(56);
+          var passNoteY = tableValueY + sy(64);
+
+          context.textAlign = "center";
+          context.fillStyle = "#5c7790";
+          context.font = "500 " + sf(90) + "px 'Cormorant Garamond'";
+          context.fillText("Bautizo de", centerX, titleY);
+
+          context.fillStyle = "#7898b2";
+          context.font = sf(100) + "px 'Great Vibes'";
+          context.fillText(invitationDetails.childName, centerX, nameY);
+
+          context.fillStyle = "#4a6176";
+          context.font = "600 " + sf(85) + "px 'Cormorant Garamond'";
+          context.fillText(invitationDetails.date, centerX, dateY);
+
+          context.fillStyle = "#6e8599";
+          context.font = "500 " + sf(55) + "px 'Cormorant Garamond'";
+          context.fillText("Con alegr\u00eda te invitamos a compartir este d\u00eda tan especial", centerX, inviteLineY);
+
+          context.fillStyle = "#7392ab";
+          context.font = sf(90) + "px 'Great Vibes'";
+          context.fillText(guest.name, centerX, guestNameY);
+
+          context.fillStyle = "#4a6176";
+          context.font = "600 " + sf(65) + "px 'Cormorant Garamond'";
+          context.fillText("Pase para", centerX, passLabelY);
+          context.fillStyle = "#6f8da8";
+          context.font = "700 " + sf(70) + "px 'Cormorant Garamond'";
+          context.fillText(String(guest.passSize) + " persona" + (guest.passSize > 1 ? "s" : ""), centerX, passCountY);
+          context.fillStyle = "#6e8599";
+          context.font = "700 " + sf(42) + "px 'Cormorant Garamond'";
+          context.fillText("Mesa", centerX, tableLabelY);
+          context.fillStyle = "#4a6176";
+          context.font = "600 " + sf(62) + "px 'Cormorant Garamond'";
+          context.fillText(String(guest.table || "-"), centerX, tableValueY);
+          context.fillStyle = "#6e8599";
+          context.font = "550 " + sf(45) + "px 'Cormorant Garamond'";
+          context.fillText("Pase \u00fanico e intransferible", centerX, passNoteY);
+
+          context.fillStyle = "#4a6176";
+          context.textAlign = "left";
+          context.font = "800 " + sf(55) + "px 'Cormorant Garamond'";
+          var liturgyTitleY = passNoteY + sy(140);
+          context.fillText("Misa", infoColumnX, liturgyTitleY);
+          context.font = "700 " + sf(55) + "px 'Cormorant Garamond'";
+          var nextY = drawWrappedBlock(context, invitationDetails.churchName, infoColumnX, liturgyTitleY + sy(75), maxTextWidth, sy(56));
+          context.font = "600 " + sf(45) + "px 'Cormorant Garamond'";
+          nextY = drawWrappedBlock(context, "Hora: " + invitationDetails.churchTime, infoColumnX, nextY + sy(16), maxTextWidth, sy(50));
+          context.font = "600 " + sf(42) + "px 'Cormorant Garamond'";
+          nextY = drawWrappedBlock(context, invitationDetails.churchAddress, infoColumnX, nextY + sy(20), maxTextWidth, sy(44));
+
+          context.font = "800 " + sf(55) + "px 'Cormorant Garamond'";
+          var receptionTitleY = nextY + sy(92);
+          context.fillText("Recepcion", infoColumnX, receptionTitleY);
+          context.font = "700 " + sf(55) + "px 'Cormorant Garamond'";
+          nextY = drawWrappedBlock(context, invitationDetails.hallName, infoColumnX, receptionTitleY + sy(74), maxTextWidth, sy(56));
+          context.font = "600 " + sf(45) + "px 'Cormorant Garamond'";
+          nextY = drawWrappedBlock(context, "Hora: " + invitationDetails.hallTime, infoColumnX, nextY + sy(16), maxTextWidth, sy(50));
+          context.font = "600 " + sf(42) + "px 'Cormorant Garamond'";
+          nextY = drawWrappedBlock(context, invitationDetails.hallAddress, infoColumnX, nextY + sy(20), maxTextWidth, sy(44));
+
+          var thankYouY = sy(2002);
+          if (qrImage) {
+            var qrSize = sx(188);
+            var infoStartY = liturgyTitleY;
+            var infoEndY = nextY;
+            var qrBlockHeight = sy(44) + sy(36) + qrSize;
+            var qrBlockTopY = infoStartY + Math.max(0, ((infoEndY - infoStartY) - qrBlockHeight) / 2);
+            var qrCenterX = qrColumnX + (qrColumnWidth / 2);
+            var qrX = qrCenterX - (qrSize / 2);
+            var qrY = qrBlockTopY + sy(80);
+
+            context.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
+
+            context.textAlign = "center";
+            context.fillStyle = "#4a6176";
+            context.font = "700 " + sf(42) + "px 'Cormorant Garamond'";
+            context.fillText("Confirma tu asistencia", qrCenterX, qrBlockTopY + sy(26));
+
+            thankYouY = Math.max(nextY + sy(60), qrY + qrSize + sy(116));
+          }
+
+          context.textAlign = "center";
+          context.fillStyle = "#6e8599";
+          context.font = "550 " + sf(45) + "px 'Cormorant Garamond'";
+          var closingText = "Con amor te esperamos para celebrar juntos este d\u00eda tan especial.";
+          var closingLineHeight = sy(48);
+          var closingLines = wrapText(context, closingText, sx(1120));
+          var closingBlockHeight = closingLines.length * closingLineHeight;
+          var closingAreaTop = thankYouY;
+          var closingAreaBottom = bottomBorderY - sy(28);
+          var centeredClosingY = closingAreaTop + Math.max(0, ((closingAreaBottom - closingAreaTop) - closingBlockHeight) / 2);
+          drawCenteredWrappedBlock(context, closingText, centerX, centeredClosingY, sx(1120), closingLineHeight);
+
+          return new Promise(function (resolve, reject) {
+            if (canvas.toBlob) {
+              canvas.toBlob(function (blob) {
+                if (!blob) {
+                  reject(new Error("No se pudo generar el archivo PNG."));
+                  return;
+                }
+
+                resolve({
+                  url: URL.createObjectURL(blob)
+                });
+              }, "image/png");
+              return;
+            }
+
+            try {
+              var dataUrl = canvas.toDataURL("image/png");
+              resolve({
+                url: dataUrl
+              });
+            } catch (error) {
+              reject(error);
+            }
+          });
+        });
+      }
+
+      function getGuestStatus(guest) {
+        var saved = rsvpMap[guest.id];
+        var attendance = saved && saved.attendance ? String(saved.attendance).trim().toLowerCase() : "";
+        if (!saved || !saved.attendance) {
+          return {
+            tone: "pending",
+            label: "Pendiente",
+            detail: "Sin confirmaci\u00f3n todav\u00eda"
+          };
+        }
+
+        if (
+          attendance === "decline" ||
+          attendance === "declined" ||
+          attendance === "no" ||
+          attendance === "0" ||
+          attendance === "no-asiste" ||
+          attendance === "no_asiste"
+        ) {
+          return {
+            tone: "declined",
+            label: "No asiste",
+            detail: "Lo siento, no podremos asistir"
+          };
+        }
+
+        var count = Number(attendance || 0);
+        return {
+          tone: "confirmed",
+          label: "Confirmado",
+          detail: count + " persona" + (count > 1 ? "s" : "") + " confirmada" + (count > 1 ? "s" : "")
+        };
+      }
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function renderStats(guests) {
+        var total = guests.length;
+        var pending = 0;
+        var confirmed = 0;
+        var confirmedSeats = 0;
+        var declinedSeats = 0;
+        var fullDeclines = 0;
+
+        guests.forEach(function (guest) {
+          var status = getGuestStatus(guest);
+          var saved = rsvpMap[guest.id] || null;
+          var attendance = saved && saved.attendance ? String(saved.attendance).trim().toLowerCase() : "";
+          if (status.tone === "pending") pending += 1;
+          if (status.tone === "confirmed") {
+            confirmed += 1;
+            confirmedSeats += Number(attendance || 0);
+            declinedSeats += Math.max(guest.passSize - Number(attendance || 0), 0);
+          }
+          if (status.tone === "declined") {
+            declinedSeats += Number(guest.passSize || 0);
+            fullDeclines += 1;
+          }
+        });
+
+        statsContainer.innerHTML = [
+          { label: "Invitados", value: total },
+          { label: "Confirmados", value: confirmed },
+          { label: "Personas", value: confirmedSeats },
+          { label: "Pendientes", value: pending },
+          {
+            label: "No asisten",
+            value: declinedSeats,
+            note: "Personas que no asistir\u00e1n"
+          },
+          {
+            label: "Invitaciones rechazadas",
+            value: fullDeclines
+          }
+        ].map(function (item) {
+          return '<article class="stat-card"><span class="stat-label">' + item.label + '</span><span class="stat-value">' + item.value + '</span>' + (item.note ? '<span class="stat-note">' + item.note + '</span>' : '') + '</article>';
+        }).join("");
+      }
+
+      function createCopyButton(link) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-primary";
+        button.textContent = "Copiar link";
+        button.addEventListener("click", function () {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(function () {
+              button.textContent = "Copiado";
+              window.setTimeout(function () {
+                button.textContent = "Copiar link";
+              }, 1400);
+            }).catch(function () {
+              button.textContent = "No se pudo copiar";
+            });
+            return;
+          }
+
+          var temp = document.createElement("input");
+          temp.value = link;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand("copy");
+          document.body.removeChild(temp);
+          button.textContent = "Copiado";
+          window.setTimeout(function () {
+            button.textContent = "Copiar link";
+          }, 1400);
+        });
+        return button;
+      }
+
+      function renderGuests(guests) {
+        var baseInviteUrl = getBaseInviteUrl();
+        guestList.innerHTML = "";
+
+        if (!guests.length) {
+          guestList.innerHTML = '<article class="guest-card"><div><h3 class="guest-name">Sin resultados</h3><p class="guest-meta">No hay invitados para el filtro seleccionado.</p></div></article>';
+          return;
+        }
+
+        guests.forEach(function (guest) {
+          var status = getGuestStatus(guest);
+          var saved = rsvpMap[guest.id] || null;
+          var link = baseInviteUrl + encodeURIComponent(guest.id);
+          var safeName = escapeHtml(guest.name);
+          var safeId = escapeHtml(guest.id);
+          var safeMessage = saved && saved.message ? escapeHtml(saved.message) : "";
+          var card = document.createElement("article");
+          card.className = "guest-card";
+          card.innerHTML =
+            '<div>' +
+              '<h3 class="guest-name">' + safeName + '</h3>' +
+              '<p class="guest-meta">ID: <strong>' + safeId + '</strong><br>Pases asignados: <strong>' + guest.passSize + '</strong><br>Mesa: <strong>' + (guest.table || "-") + '</strong></p>' +
+              (safeMessage ? '<p class="guest-meta"><strong>Mensaje:</strong> ' + safeMessage + '</p>' : "") +
+            '</div>' +
+            '<div class="guest-status">' +
+              '<span class="badge ' + status.tone + '">' + status.label + '</span>' +
+              '<span class="status-note">' + status.detail + '</span>' +
+            '</div>' +
+            '<div class="guest-actions">' +
+              '<div class="link-preview">' + escapeHtml(link) + '</div>' +
+            '</div>';
+
+          var actions = card.querySelector(".guest-actions");
+          actions.appendChild(createCopyButton(link));
+          actions.appendChild(createDownloadButton(guest));
+          guestList.appendChild(card);
+        });
+      }
+
+      function getFilteredGuests() {
+        if (activeFilter === "all") return allGuests.slice();
+
+        return allGuests.filter(function (guest) {
+          return getGuestStatus(guest).tone === activeFilter;
+        });
+      }
+
+      function renderFilteredView() {
+        renderGuests(getFilteredGuests());
+      }
+
+      function showDashboard(guests) {
+        allGuests = guests.slice();
+        loginPanel.style.display = "none";
+        dashboardPanel.classList.add("is-visible");
+        renderStats(guests);
+        renderFilteredView();
+      }
+
+      function loadDashboard() {
+        if (dataApi.isUsingFirestore()) {
+          storageNote.innerHTML = "Este panel est&aacute; leyendo confirmaciones y mensajes desde <strong>Cloud Firestore</strong>.";
+        } else {
+          storageNote.innerHTML = "Firestore a&uacute;n no est&aacute; activo en este navegador. El panel usar&aacute; el respaldo local hasta que completes la configuraci&oacute;n de Firebase.";
+        }
+
+        Promise.all([
+          dataApi.loadGuests(),
+          dataApi.getAllRsvps()
+        ])
+          .then(function (result) {
+            var guests = result[0];
+            rsvpMap = result[1] || {};
+            showDashboard(guests);
+          })
+          .catch(function () {
+            rsvpMap = {};
+            showDashboard([]);
+            loginMessage.textContent = "No se pudo cargar el panel. Verifica tu sesi\u00f3n y las reglas de Firestore.";
+          });
+      }
+
+      importGuestsButton.addEventListener("click", function () {
+        if (!dataApi.isUsingFirestore()) {
+          storageNote.innerHTML = "Primero completa <strong>firebase-config.js</strong> para activar Firestore.";
+          return;
+        }
+
+        importGuestsButton.disabled = true;
+        importGuestsButton.textContent = "Importando...";
+        storageNote.innerHTML = "Subiendo invitados desde <strong>public/invitados.json</strong> a la coleccion <strong>invitados</strong>...";
+
+        dataApi.importGuestsFromJson()
+          .then(function (count) {
+            storageNote.innerHTML = "Se importaron <strong>" + count + "</strong> invitados a Cloud Firestore.";
+            return loadDashboard();
+          })
+          .catch(function (error) {
+            storageNote.innerHTML = "No se pudo importar la lista. Si Firestore ya esta configurado, revisa las reglas de la coleccion <strong>invitados</strong>. " + (error && error.message ? error.message : "");
+          })
+          .finally(function () {
+            importGuestsButton.disabled = false;
+            importGuestsButton.textContent = "Importar invitados";
+          });
+      });
+
+      loginButton.addEventListener("click", function () {
+        if (!auth) {
+          loginMessage.textContent = "Firebase Authentication no est\u00e1 disponible en este navegador.";
+          loginMessage.classList.add("error");
+          return;
+        }
+
+        var email = emailInput.value.trim();
+        var password = passwordInput.value;
+
+        if (!email || !password) {
+          loginMessage.textContent = "Ingresa tu correo y contrase\u00f1a.";
+          loginMessage.classList.add("error");
+          return;
+        }
+
+        loginButton.disabled = true;
+        loginMessage.textContent = "Iniciando sesi\u00f3n...";
+        loginMessage.classList.remove("error");
+
+        auth.signInWithEmailAndPassword(email, password)
+          .then(function () {
+            passwordInput.value = "";
+          })
+          .catch(function (error) {
+            loginMessage.textContent = "No se pudo iniciar sesi\u00f3n. " + (error && error.message ? error.message : "");
+            loginMessage.classList.add("error");
+          })
+          .finally(function () {
+            loginButton.disabled = false;
+          });
+      });
+
+      filtersContainer.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-filter]");
+        if (!button) return;
+
+        activeFilter = button.getAttribute("data-filter") || "all";
+        Array.prototype.forEach.call(filtersContainer.querySelectorAll(".filter-chip"), function (chip) {
+          chip.classList.toggle("is-active", chip === button);
+        });
+        renderFilteredView();
+      });
+
+      function submitOnEnter(event) {
+        if (event.key === "Enter") {
+          loginButton.click();
+        }
+      }
+
+      emailInput.addEventListener("keydown", submitOnEnter);
+      passwordInput.addEventListener("keydown", submitOnEnter);
+
+      logoutButton.addEventListener("click", function () {
+        if (!auth) {
+          window.location.reload();
+          return;
+        }
+
+        logoutButton.disabled = true;
+        auth.signOut()
+          .finally(function () {
+            logoutButton.disabled = false;
+          });
+      });
+
+      if (!auth) {
+        loginMessage.textContent = "Configura Firebase Authentication para usar este panel.";
+        loginMessage.classList.add("error");
+        return;
+      }
+
+      auth.onAuthStateChanged(function (user) {
+        if (user) {
+          loginMessage.textContent = "Sesi\u00f3n iniciada como " + (user.email || "administrador") + ".";
+          loginMessage.classList.remove("error");
+          loadDashboard();
+          return;
+        }
+
+        loginPanel.style.display = "";
+        dashboardPanel.classList.remove("is-visible");
+        guestList.innerHTML = "";
+        statsContainer.innerHTML = "";
+        allGuests = [];
+        rsvpMap = {};
+        passwordInput.value = "";
+        storageNote.innerHTML = "Este panel leer&aacute; confirmaciones desde <strong>Cloud Firestore</strong> cuando inicies sesi&oacute;n.";
+        loginMessage.textContent = "Inicia sesi\u00f3n con tu cuenta de Firebase Authentication.";
+        loginMessage.classList.remove("error");
+      });
+    })();
+  </script>
+</body>
+</html>
