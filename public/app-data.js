@@ -57,14 +57,44 @@
 
   initFirebase();
 
+  function normalizeGuestTables(item) {
+    if (!item) return [];
+
+    if (Array.isArray(item.tables) && item.tables.length) {
+      return item.tables.map(function (entry) {
+        return {
+          table: Number(entry && entry.table || 0),
+          count: Number(entry && entry.count || 0),
+          group: String(entry && entry.group || "").trim()
+        };
+      }).filter(function (entry) {
+        return entry.table || entry.group || entry.count;
+      });
+    }
+
+    if (item.table) {
+      return [{
+        table: Number(item.table || 0),
+        count: Number(item.passSize || 0),
+        group: ""
+      }];
+    }
+
+    return [];
+  }
+
   function normalizeGuest(item) {
     if (!item) return null;
+
+    var normalizedTables = normalizeGuestTables(item);
 
     return {
       id: String(item.id || "").trim(),
       name: String(item.name || "").trim(),
       passSize: Number(item.passSize || 0),
-      table: Number(item.table || 0)
+      table: Number(item.table || 0),
+      tables: normalizedTables,
+      hasRsvp: Boolean(item.hasRsvp)
     };
   }
 
@@ -176,14 +206,22 @@
   }
 
   function saveFirestoreRsvp(id, guest, payload) {
-    return firestore.collection("confirmaciones").doc(id).set({
-      attendance: payload.attendance,
-      message: payload.message,
-      guestId: id,
-      guestName: guest.name,
-      passSize: guest.passSize,
-      updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true }).then(function () {
+    var timestamp = window.firebase.firestore.FieldValue.serverTimestamp();
+
+    return Promise.all([
+      firestore.collection("confirmaciones").doc(id).set({
+        attendance: payload.attendance,
+        message: payload.message,
+        guestId: id,
+        guestName: guest.name,
+        passSize: guest.passSize,
+        updatedAt: timestamp
+      }, { merge: true }),
+      firestore.collection("invitados").doc(id).set({
+        hasRsvp: true,
+        updatedAt: timestamp
+      }, { merge: true })
+    ]).then(function () {
       return {
         saved: sanitizeRsvp(payload),
         mode: "firestore"
@@ -199,6 +237,44 @@
     }
 
     return chunks;
+  }
+
+  function runChunkedBatches(items, size, applyChunk) {
+    var chunks = chunkList(items, size);
+    var sequence = Promise.resolve();
+
+    chunks.forEach(function (chunk) {
+      sequence = sequence.then(function () {
+        return applyChunk(chunk);
+      });
+    });
+
+    return sequence;
+  }
+
+  function syncGuestRsvpFlags(guests, rsvpMap) {
+    if (!firebaseReady) {
+      return Promise.resolve(0);
+    }
+
+    var updates = guests.filter(function (guest) {
+      return Boolean(guest.hasRsvp) !== Boolean(rsvpMap && rsvpMap[guest.id]);
+    });
+
+    return runChunkedBatches(updates, 400, function (group) {
+      var batch = firestore.batch();
+
+      group.forEach(function (guest) {
+        var ref = firestore.collection("invitados").doc(guest.id);
+        batch.set(ref, {
+          hasRsvp: Boolean(rsvpMap && rsvpMap[guest.id])
+        }, { merge: true });
+      });
+
+      return batch.commit();
+    }).then(function () {
+      return updates.length;
+    });
   }
 
   window.AppData = {
@@ -268,30 +344,55 @@
       }
 
       return loadGuestsFromJson().then(function (guests) {
-        var groups = chunkList(guests, 400);
-        var sequence = Promise.resolve();
+        var guestIds = guests.map(function (guest) {
+          return guest.id;
+        });
 
-        groups.forEach(function (group) {
-          sequence = sequence.then(function () {
+        return firestore.collection("invitados").get().then(function (snapshot) {
+          var staleIds = [];
+
+          snapshot.forEach(function (doc) {
+            if (guestIds.indexOf(doc.id) === -1) {
+              staleIds.push(doc.id);
+            }
+          });
+
+          return runChunkedBatches(staleIds, 400, function (group) {
             var batch = firestore.batch();
 
-            group.forEach(function (guest) {
-              var ref = firestore.collection("invitados").doc(guest.id);
-              batch.set(ref, {
-                name: guest.name,
-                passSize: guest.passSize,
-                table: guest.table
-              }, { merge: true });
+            group.forEach(function (staleId) {
+              var ref = firestore.collection("invitados").doc(staleId);
+              batch.delete(ref);
             });
 
             return batch.commit();
+          }).then(function () {
+            return runChunkedBatches(guests, 400, function (group) {
+              var batch = firestore.batch();
+
+              group.forEach(function (guest) {
+                var ref = firestore.collection("invitados").doc(guest.id);
+                batch.set(ref, {
+                  name: guest.name,
+                  passSize: guest.passSize,
+                  table: guest.table,
+                  tables: guest.tables
+                }, { merge: true });
+              });
+
+              return batch.commit();
+            });
+          }).then(function () {
+            return {
+              imported: guests.length,
+              removed: staleIds.length
+            };
           });
         });
-
-        return sequence.then(function () {
-          return guests.length;
-        });
       });
+    },
+    syncGuestRsvpFlags: function (guests, rsvpMap) {
+      return syncGuestRsvpFlags(guests || [], rsvpMap || {});
     }
   };
 })();

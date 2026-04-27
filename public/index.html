@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bautizo Liam Matias</title>
-  <meta name="description" content="Invitacion web para el bautizo de Liam Matias">
+  <title>Bautizo Liam Matías</title>
+  <meta name="description" content="Invitación web para el bautizo de Liam Matías">
   <meta name="theme-color" content="#5A8DB3">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Bautizo Liam Matias">
-  <meta property="og:title" content="Bautizo de Liam Matias">
-  <meta property="og:description" content="Con amor te invitamos a celebrar el bautizo de Liam Matias. Abre la invitaci&oacute;n y acomp&aacute;&ntilde;anos en este d&iacute;a tan especial.">
+  <meta property="og:site_name" content="Bautizo Liam Matías">
+  <meta property="og:title" content="Bautizo de Liam Matías">
+  <meta property="og:description" content="Con amor te invitamos a celebrar el bautizo de Liam Matías. Abre la invitaci&oacute;n y acomp&aacute;&ntilde;anos en este d&iacute;a tan especial.">
   <meta property="og:image" content="https://liam-matias.web.app/assets/share/wa-preview-envelope.png">
   <meta property="og:image:secure_url" content="https://liam-matias.web.app/assets/share/wa-preview-envelope.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Vista previa elegante de la invitaci&oacute;n del bautizo de Liam Matias">
+  <meta property="og:image:alt" content="Vista previa elegante de la invitaci&oacute;n del bautizo de Liam Matías">
   <meta property="og:locale" content="es_MX">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bautizo de Liam Matias">
-  <meta name="twitter:description" content="Con amor te invitamos a celebrar el bautizo de Liam Matias. Abre la invitaci&oacute;n y acomp&aacute;&ntilde;anos en este d&iacute;a tan especial.">
+  <meta name="twitter:title" content="Bautizo de Liam Matías">
+  <meta name="twitter:description" content="Con amor te invitamos a celebrar el bautizo de Liam Matías. Abre la invitaci&oacute;n y acomp&aacute;&ntilde;anos en este d&iacute;a tan especial.">
   <meta name="twitter:image" content="https://liam-matias.web.app/assets/share/wa-preview-envelope.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1187,7 +1187,7 @@
     .pass-table-label {
       margin: 16px 0 0;
       font-family: "Cormorant Garamond", serif;
-      color: var(--muted);
+      color: #111111;
       font-size: clamp(1.2rem, 2.4vw, 1.65rem);
       line-height: 1.15;
       font-weight: 700;
@@ -1199,10 +1199,39 @@
       margin: 8px 0 0;
       font-family: "Cormorant Garamond", serif;
       color: var(--primary-deep);
-      font-size: clamp(2rem, 4.8vw, 3rem);
-      line-height: 1;
+      font-size: clamp(1.65rem, 4vw, 2.45rem);
+      line-height: 1.18;
       font-weight: 600;
       letter-spacing: -0.02em;
+    }
+
+    .pass-table-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 68px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      color: #456f8f;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(232,243,250,0.92));
+      border: 1px solid rgba(90,141,179,0.18);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        0 10px 22px rgba(73,120,149,0.08);
+      font-size: 1.08em;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .pass-table-line + .pass-table-line {
+      margin-top: 6px;
+    }
+
+    .pass-table-group {
+      color: var(--muted);
+      font-size: 0.88em;
+      letter-spacing: 0.02em;
     }
 
     .pass-empty {
@@ -1382,6 +1411,43 @@
       color: var(--primary-deep);
       letter-spacing: -0.01em;
       font-weight: 500;
+    }
+
+    .rsvp-locked {
+      display: grid;
+      gap: 18px;
+      padding: 30px 24px;
+      text-align: center;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,249,253,0.9));
+      border: 1px solid rgba(90,141,179,0.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.92),
+        0 18px 36px rgba(73,120,149,0.1);
+    }
+
+    .rsvp-locked[hidden] {
+      display: none;
+    }
+
+    .rsvp-locked h3 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--primary-deep);
+      font-weight: 500;
+    }
+
+    .rsvp-locked p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.6;
+    }
+
+    .rsvp-locked .btn {
+      justify-self: center;
+      min-width: min(100%, 260px);
     }
 
     .rsvp-options {
@@ -1996,7 +2062,7 @@
         <div class="gate-seal" aria-hidden="true">L</div>
         <p class="gate-kicker">Invitaci&oacute;n Especial</p>
         <p class="gate-script">Con amor</p>
-        <h1 class="gate-title" id="gate-title">Bautizo de Liam Matias</h1>
+        <h1 class="gate-title" id="gate-title">Bautizo de Liam Matías</h1>
         <div class="gate-actions">
           <button class="btn btn-primary gate-btn" type="button" id="open-invitation-button">Abrir invitaci&oacute;n</button>
         </div>
@@ -2011,7 +2077,7 @@
           <div class="hero-overlay">
             <p class="hero-pill">Mi Bautizo</p>
             <p class="hero-script">Una celebracion para recordar</p>
-            <h1 class="hero-title">Liam Matias</h1>
+            <h1 class="hero-title">Liam Matías</h1>
             <p class="hero-text">
               Con la bendicion de Dios y el amor de nuestra familia,
               queremos compartir contigo este momento tan especial.
@@ -2034,7 +2100,7 @@
           <div class="hero-overlay">
             <p class="hero-pill">Un Dia Especial</p>
             <p class="hero-script">Fe, familia y un recuerdo hermoso</p>
-            <h2 class="hero-title">Liam Matias</h2>
+            <h2 class="hero-title">Liam Matías</h2>
             <p class="hero-text">
               Acompa&ntilde;anos a celebrar el bautizo de
               nuestro peque&ntilde;o. 
@@ -2083,7 +2149,7 @@
           </div>
           <div class="framed-card-inner welcome-inner">
             <p class="welcome-hand">Bienvenidos al bautizo<br>de nuestro peque&ntilde;o</p>
-            <h2 class="welcome-name">Liam Matias</h2>
+            <h2 class="welcome-name">Liam Matías</h2>
             <p class="welcome-date">21 &#8226; Junio &#8226; 2026</p>
 
             <div class="countdown" data-target-date="2026-06-21T13:00:00-06:00">
@@ -2123,7 +2189,7 @@
             <p class="family-line">Con amor y gratitud,</p>
             <p class="family-line">acompa&ntilde;ado de</p>
             <h2 class="family-heading">Mis Pap&aacute;s</h2>
-            <p class="family-names">Ana Paulina Velazquez<br>Walter Gomez</p>
+            <p class="family-names">Ana Paulina Velazquez<br>Walter Gómez</p>
 
             <div class="family-spacer" aria-hidden="true"></div>
 
@@ -2157,7 +2223,7 @@
           </div>
           <div class="framed-card-inner">
             <p class="panel-label">Misa</p>
-            <h2 class="panel-place">Parroquia Ntra Sra<br>de Guadalupe y<br>San Miguel Arcangel</h2>
+            <h2 class="panel-place">Parroquia Ntra. Sra.<br>de Guadalupe y<br>San Miguel Arcangel</h2>
 
             <figure class="panel-photo">
               <img src="./assets/iglesia/image.png" alt="Foto de la iglesia">
@@ -2258,41 +2324,48 @@
               </div>
               <div class="framed-card-inner pass-card-inner">
                 <figure class="pass-photo pass-photo--compact">
-                  <img src="./assets/gallery/principal-1.jpeg" alt="Foto principal de Liam Matias">
+                  <img src="./assets/gallery/principal-1.jpeg" alt="Foto principal de Liam Matías">
                 </figure>
 
                 <h2 class="panel-place pass-guest-name" id="selected-guest-name">Invitado</h2>
                 <p class="pass-count-label">Pase para</p>
                 <p class="pass-count" id="selected-guest-pass">0 Personas</p>
-                <p class="pass-table-label">Mesa</p>
+                <p class="pass-table-label" id="selected-guest-table-label">Mesa</p>
                 <p class="pass-table" id="selected-guest-table">-</p>
                 <p class="pass-note">Pase &uacute;nico e intransferible</p>
               </div>
             </section>
 
             <section class="rsvp-card rsvp-card--static" id="rsvp-card" aria-live="polite">
-              <div class="rsvp-grid">
-                <div class="rsvp-box">
-                  <h3>Confirmar asistencia</h3>
-                  <div class="rsvp-options">
-                    <div class="rsvp-select-wrap" id="attendance-select-wrap">
-                      <label class="rsvp-select-label" for="attendance-select">Selecciona tu respuesta</label>
-                      <button class="rsvp-select-trigger" type="button" id="attendance-select" aria-haspopup="listbox" aria-expanded="false">
-                        Elige una opci&oacute;n
-                      </button>
-                      <div class="rsvp-select-menu" id="attendance-menu" role="listbox" hidden></div>
+              <div id="rsvp-form-content">
+                <div class="rsvp-grid">
+                  <div class="rsvp-box">
+                    <h3>Confirmar asistencia</h3>
+                    <div class="rsvp-options">
+                      <div class="rsvp-select-wrap" id="attendance-select-wrap">
+                        <label class="rsvp-select-label" for="attendance-select">Selecciona tu respuesta</label>
+                        <button class="rsvp-select-trigger" type="button" id="attendance-select" aria-haspopup="listbox" aria-expanded="false">
+                          Elige una opci&oacute;n
+                        </button>
+                        <div class="rsvp-select-menu" id="attendance-menu" role="listbox" hidden></div>
+                      </div>
                     </div>
+                  </div>
+
+                  <div class="rsvp-box">
+                    <h3>Ded&iacute;cale unas palabras</h3>
+                    <textarea class="rsvp-textarea" id="guest-message" placeholder="Escribe aqu&iacute; un mensaje bonito para Liam Matías..."></textarea>
                   </div>
                 </div>
 
-                <div class="rsvp-box">
-                  <h3>Ded&iacute;cale unas palabras</h3>
-                  <textarea class="rsvp-textarea" id="guest-message" placeholder="Escribe aqu&iacute; un mensaje bonito para Liam Matias..."></textarea>
+                <div class="rsvp-submit">
+                  <button class="btn btn-primary" type="button" id="confirm-button">Guardar confirmaci&oacute;n</button>
                 </div>
               </div>
-
-              <div class="rsvp-submit">
-                <button class="btn btn-primary" type="button" id="confirm-button">Guardar confirmaci&oacute;n</button>
+              <div class="rsvp-locked" id="rsvp-locked" hidden>
+                <h3>Confirmaci&oacute;n registrada</h3>
+                <p>Ya tenemos una confirmaci&oacute;n guardada para este pase. Si desea modificarla, contacte al organizador.</p>
+                <a class="btn btn-primary" href="https://wa.me/523328333351" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
               </div>
               <p class="rsvp-note" id="rsvp-feedback">
                 Te agradecemos mucho confirmar tu asistencia.
@@ -2306,10 +2379,10 @@
     </div>
   </main>
 
-  <script src="./firebase-config.js"></script>
+  <script src="./firebase-config.js?v=20260415-2145"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="./app-data.js"></script>
+  <script src="./app-data.js?v=20260415-2145"></script>
   <script>
     (function () {
       var gate = document.getElementById("invitation-gate");
@@ -2438,6 +2511,7 @@
       var emptyState = document.getElementById("invite-empty");
       var selectedName = document.getElementById("selected-guest-name");
       var selectedPass = document.getElementById("selected-guest-pass");
+      var selectedTableLabel = document.getElementById("selected-guest-table-label");
       var selectedTable = document.getElementById("selected-guest-table");
       var attendanceSelect = document.getElementById("attendance-select");
       var attendanceSelectWrap = document.getElementById("attendance-select-wrap");
@@ -2445,6 +2519,8 @@
       var messageField = document.getElementById("guest-message");
       var feedback = document.getElementById("rsvp-feedback");
       var confirmButton = document.getElementById("confirm-button");
+      var rsvpFormContent = document.getElementById("rsvp-form-content");
+      var rsvpLocked = document.getElementById("rsvp-locked");
       var activeGuest = null;
       var selectedAttendanceValue = "";
       var dataApi = window.AppData;
@@ -2544,10 +2620,23 @@
         messageField.value = "";
       }
 
+      function setRsvpLockedState(isLocked) {
+        rsvpFormContent.hidden = !!isLocked;
+        rsvpLocked.hidden = !isLocked;
+        feedback.hidden = !!isLocked;
+      }
+
       function hydrateSavedState(guest) {
         return dataApi.getRsvp(guest.id).then(function (saved) {
           if (!saved) {
+            if (guest && guest.hasRsvp) {
+              resetFormState();
+              setRsvpLockedState(true);
+              return;
+            }
+
             resetFormState();
+            setRsvpLockedState(false);
             feedback.textContent = "Nos encantar\u00e1 contar con su compa\u00f1\u00eda. Agradeceremos confirme el n\u00famero de asistentes y, si gusta, nos deje un mensaje.";
             return;
           }
@@ -2557,19 +2646,59 @@
             setAttendanceValue(saved.attendance, findAttendanceLabel(saved.attendance));
           }
           messageField.value = saved.message || "";
-          feedback.textContent = "Ya ten\u00edamos una confirmaci\u00f3n guardada para este pase.";
+          setRsvpLockedState(true);
         }).catch(function () {
           resetFormState();
+          setRsvpLockedState(false);
           messageField.value = "";
           feedback.textContent = "Nos encantar\u00e1 contar con su compa\u00f1\u00eda. Agradeceremos confirme el n\u00famero de asistentes y, si gusta, nos deje un mensaje.";
         });
+      }
+
+      function getGuestTableEntries(guest) {
+        if (guest && Array.isArray(guest.tables) && guest.tables.length) {
+          return guest.tables;
+        }
+
+        if (guest && guest.table) {
+          return [{
+            table: guest.table,
+            count: guest.passSize,
+            group: ""
+          }];
+        }
+
+        return [];
+      }
+
+      function getGuestTableLabel(guest) {
+        return "Mesa";
+      }
+
+      function getGuestTableMarkup(guest) {
+        var entries = getGuestTableEntries(guest);
+        if (!entries.length) return "-";
+
+        return entries.map(function (entry) {
+          var hasSeparateGroups = !!entry.group;
+          var detail = entry.table || "-";
+
+          if (hasSeparateGroups) {
+            detail = "Mesa " + detail + ' <span class="pass-table-group">&middot; ' + (entry.count ? entry.count + " " : "") + entry.group + '</span>';
+          } else {
+            detail = '<span class="pass-table-number">' + detail + '</span>';
+          }
+
+          return '<div class="pass-table-line">' + detail + '</div>';
+        }).join("");
       }
 
       function showGuest(guest) {
         activeGuest = guest;
         selectedName.textContent = guest.name;
         selectedPass.textContent = guest.passSize + " Persona" + (guest.passSize > 1 ? "s" : "");
-        selectedTable.textContent = guest.table ? String(guest.table) : "-";
+        selectedTableLabel.textContent = getGuestTableLabel(guest);
+        selectedTable.innerHTML = getGuestTableMarkup(guest);
         renderAttendanceOptions(guest);
         emptyState.hidden = true;
         inviteLayout.hidden = false;
@@ -2611,11 +2740,13 @@
 
           if (result.mode === "firestore") {
             feedback.textContent = successMessage;
+            setRsvpLockedState(true);
             return;
           }
 
           if (result.mode === "local-fallback") {
             feedback.textContent = successMessage + " Tu selecci\u00f3n se guard\u00f3 solo en este dispositivo. Firestore no respondi\u00f3 todav\u00eda.";
+            setRsvpLockedState(true);
             if (result.error) {
               console.error("Error guardando en Firestore:", result.error);
             }
@@ -2623,6 +2754,7 @@
           }
 
           feedback.textContent = successMessage + " Tu selecci\u00f3n se guard\u00f3 solo en este dispositivo. Firestore a\u00fan no est\u00e1 activo.";
+          setRsvpLockedState(true);
         }).catch(function () {
           feedback.textContent = "No pudimos guardar tu confirmaci\u00f3n. Intenta de nuevo.";
         }).finally(function () {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Invitaciones</title>
+  <title>Admin de Invitaciones</title>
   <meta name="description" content="Panel de administraci&oacute;n de invitados y confirmaciones">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -516,7 +516,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="./app-data.js"></script>
+  <script src="./app-data.js?v=20260415-2145"></script>
   <script>
     (function () {
       var loginPanel = document.getElementById("login-panel");
@@ -536,10 +536,11 @@
       var rsvpMap = {};
       var allGuests = [];
       var activeFilter = "all";
+      var authReady = false;
       var adminArtData = window.ADMIN_ART || {};
       var inviteArt = {};
       var invitationDetails = {
-        childName: "Liam Matias",
+        childName: "Liam Matías",
         date: "21 de Junio de 2026",
         churchName: "Parroquia Ntra Sra de Guadalupe y San Miguel Arcangel",
         churchTime: "12:00 p.m.",
@@ -757,6 +758,53 @@
         return y + (lines.length * lineHeight);
       }
 
+      function getGuestTableEntries(guest) {
+        if (guest && Array.isArray(guest.tables) && guest.tables.length) {
+          return guest.tables;
+        }
+
+        if (guest && guest.table) {
+          return [{
+            table: guest.table,
+            count: guest.passSize,
+            group: ""
+          }];
+        }
+
+        return [];
+      }
+
+      function getGuestTableLabel(guest) {
+        return "Mesa";
+      }
+
+      function getGuestTableLines(guest) {
+        var entries = getGuestTableEntries(guest);
+        if (!entries.length) return ["-"];
+
+        return entries.map(function (entry) {
+          if (entry.group) {
+            var detail = [];
+            if (entry.table) detail.push("Mesa " + entry.table);
+            detail.push((entry.count ? entry.count + " " : "") + entry.group);
+            return detail.join(" · ");
+          }
+
+          return entry.table || "-";
+        });
+      }
+
+      function hasGuestSeparateTables(guest) {
+        var entries = getGuestTableEntries(guest);
+        return entries.some(function (entry) {
+          return Boolean(entry.group);
+        });
+      }
+
+      function getGuestTableSummary(guest) {
+        return getGuestTableLines(guest).join("<br>");
+      }
+
       function roundRect(context, x, y, width, height, radius) {
         context.beginPath();
         context.moveTo(x + radius, y);
@@ -898,7 +946,9 @@
           var passCountY = passLabelY + sy(78);
           var tableLabelY = passCountY + sy(78);
           var tableValueY = tableLabelY + sy(56);
-          var passNoteY = tableValueY + sy(64);
+          var tableLineHeight = sy(52);
+          var tableLines = getGuestTableLines(guest);
+          var passNoteY = tableValueY + ((tableLines.length - 1) * tableLineHeight) + sy(64);
 
           context.textAlign = "center";
           context.fillStyle = "#5c7790";
@@ -927,12 +977,14 @@
           context.fillStyle = "#6f8da8";
           context.font = "700 " + sf(70) + "px 'Cormorant Garamond'";
           context.fillText(String(guest.passSize) + " persona" + (guest.passSize > 1 ? "s" : ""), centerX, passCountY);
-          context.fillStyle = "#6e8599";
-          context.font = "700 " + sf(42) + "px 'Cormorant Garamond'";
-          context.fillText("Mesa", centerX, tableLabelY);
           context.fillStyle = "#4a6176";
-          context.font = "600 " + sf(62) + "px 'Cormorant Garamond'";
-          context.fillText(String(guest.table || "-"), centerX, tableValueY);
+          context.font = "700 " + sf(42) + "px 'Cormorant Garamond'";
+          context.fillText(getGuestTableLabel(guest), centerX, tableLabelY);
+          context.fillStyle = "#4a6176";
+          tableLines.forEach(function (line, index) {
+            context.font = (hasGuestSeparateTables(guest) ? "600 " + sf(52) : "700 " + sf(60)) + "px 'Cormorant Garamond'";
+            context.fillText(line, centerX, tableValueY + (index * tableLineHeight));
+          });
           context.fillStyle = "#6e8599";
           context.font = "550 " + sf(45) + "px 'Cormorant Garamond'";
           context.fillText("Pase \u00fanico e intransferible", centerX, passNoteY);
@@ -951,7 +1003,7 @@
 
           context.font = "800 " + sf(55) + "px 'Cormorant Garamond'";
           var receptionTitleY = nextY + sy(92);
-          context.fillText("Recepcion", infoColumnX, receptionTitleY);
+          context.fillText("Recepción", infoColumnX, receptionTitleY);
           context.font = "700 " + sf(55) + "px 'Cormorant Garamond'";
           nextY = drawWrappedBlock(context, invitationDetails.hallName, infoColumnX, receptionTitleY + sy(74), maxTextWidth, sy(56));
           context.font = "600 " + sf(45) + "px 'Cormorant Garamond'";
@@ -1137,6 +1189,17 @@
         return button;
       }
 
+      function createViewButton(link) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-secondary";
+        button.textContent = "Ver";
+        button.addEventListener("click", function () {
+          window.open(link, "_blank", "noopener,noreferrer");
+        });
+        return button;
+      }
+
       function renderGuests(guests) {
         var baseInviteUrl = getBaseInviteUrl();
         guestList.innerHTML = "";
@@ -1158,7 +1221,7 @@
           card.innerHTML =
             '<div>' +
               '<h3 class="guest-name">' + safeName + '</h3>' +
-              '<p class="guest-meta">ID: <strong>' + safeId + '</strong><br>Pases asignados: <strong>' + guest.passSize + '</strong><br>Mesa: <strong>' + (guest.table || "-") + '</strong></p>' +
+              '<p class="guest-meta">ID: <strong>' + safeId + '</strong><br>Pases asignados: <strong>' + guest.passSize + '</strong><br>' + getGuestTableLabel(guest) + ': <strong>' + getGuestTableSummary(guest) + '</strong></p>' +
               (safeMessage ? '<p class="guest-meta"><strong>Mensaje:</strong> ' + safeMessage + '</p>' : "") +
             '</div>' +
             '<div class="guest-status">' +
@@ -1170,6 +1233,7 @@
             '</div>';
 
           var actions = card.querySelector(".guest-actions");
+          actions.appendChild(createViewButton(link));
           actions.appendChild(createCopyButton(link));
           actions.appendChild(createDownloadButton(guest));
           guestList.appendChild(card);
@@ -1204,19 +1268,64 @@
         }
 
         Promise.all([
-          dataApi.loadGuests(),
-          dataApi.getAllRsvps()
+          dataApi.loadGuests().catch(function () {
+            return [];
+          }),
+          dataApi.getAllRsvps().catch(function () {
+            return {};
+          })
         ])
           .then(function (result) {
-            var guests = result[0];
+            var guests = result[0] || [];
             rsvpMap = result[1] || {};
-            showDashboard(guests);
-          })
-          .catch(function () {
-            rsvpMap = {};
-            showDashboard([]);
-            loginMessage.textContent = "No se pudo cargar el panel. Verifica tu sesi\u00f3n y las reglas de Firestore.";
+
+            if (!guests.length) {
+              showDashboard([]);
+              loginMessage.textContent = "No se pudieron cargar los invitados. Verifica la sesi\u00f3n, las reglas de Firestore o el acceso a public/invitados.json.";
+              loginMessage.classList.add("error");
+              return;
+            }
+
+            return dataApi.syncGuestRsvpFlags(guests, rsvpMap).catch(function () {
+              return 0;
+            }).then(function () {
+              guests.forEach(function (guest) {
+                guest.hasRsvp = Boolean(rsvpMap[guest.id]);
+              });
+
+              showDashboard(guests);
+
+              if (!Object.keys(rsvpMap).length) {
+                loginMessage.textContent = "Se cargaron los invitados, pero no fue posible leer las confirmaciones desde este dispositivo.";
+                loginMessage.classList.add("error");
+              } else {
+                loginMessage.classList.remove("error");
+              }
+            });
           });
+      }
+
+      function withTimeout(promise, timeoutMs) {
+        return new Promise(function (resolve, reject) {
+          var settled = false;
+          var timer = window.setTimeout(function () {
+            if (settled) return;
+            settled = true;
+            reject(new Error("Tiempo de espera agotado al comunicarse con Firebase Authentication."));
+          }, timeoutMs);
+
+          promise.then(function (value) {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(timer);
+            resolve(value);
+          }).catch(function (error) {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(timer);
+            reject(error);
+          });
+        });
       }
 
       importGuestsButton.addEventListener("click", function () {
@@ -1227,15 +1336,15 @@
 
         importGuestsButton.disabled = true;
         importGuestsButton.textContent = "Importando...";
-        storageNote.innerHTML = "Subiendo invitados desde <strong>public/invitados.json</strong> a la coleccion <strong>invitados</strong>...";
+        storageNote.innerHTML = "Subiendo invitados desde <strong>public/invitados.json</strong> a la colección <strong>invitados</strong>...";
 
         dataApi.importGuestsFromJson()
-          .then(function (count) {
-            storageNote.innerHTML = "Se importaron <strong>" + count + "</strong> invitados a Cloud Firestore.";
+          .then(function (result) {
+            storageNote.innerHTML = "Se sincronizaron <strong>" + result.imported + "</strong> invitados en Cloud Firestore y se eliminaron <strong>" + result.removed + "</strong> registros anteriores.";
             return loadDashboard();
           })
           .catch(function (error) {
-            storageNote.innerHTML = "No se pudo importar la lista. Si Firestore ya esta configurado, revisa las reglas de la coleccion <strong>invitados</strong>. " + (error && error.message ? error.message : "");
+            storageNote.innerHTML = "No se pudo importar la lista. Si Firestore ya está configurado, revisa las reglas de la colección <strong>invitados</strong>. " + (error && error.message ? error.message : "");
           })
           .finally(function () {
             importGuestsButton.disabled = false;
@@ -1246,6 +1355,12 @@
       loginButton.addEventListener("click", function () {
         if (!auth) {
           loginMessage.textContent = "Firebase Authentication no est\u00e1 disponible en este navegador.";
+          loginMessage.classList.add("error");
+          return;
+        }
+
+        if (!authReady) {
+          loginMessage.textContent = "Firebase Authentication a\u00fan se est\u00e1 preparando en este dispositivo. Intenta de nuevo en unos segundos.";
           loginMessage.classList.add("error");
           return;
         }
@@ -1263,7 +1378,7 @@
         loginMessage.textContent = "Iniciando sesi\u00f3n...";
         loginMessage.classList.remove("error");
 
-        auth.signInWithEmailAndPassword(email, password)
+        withTimeout(auth.signInWithEmailAndPassword(email, password), 12000)
           .then(function () {
             passwordInput.value = "";
           })
@@ -1315,7 +1430,13 @@
         return;
       }
 
+      loginButton.disabled = true;
+      loginMessage.textContent = "Preparando acceso seguro...";
+
       auth.onAuthStateChanged(function (user) {
+        authReady = true;
+        loginButton.disabled = false;
+
         if (user) {
           loginMessage.textContent = "Sesi\u00f3n iniciada como " + (user.email || "administrador") + ".";
           loginMessage.classList.remove("error");
